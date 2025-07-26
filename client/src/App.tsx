@@ -28,8 +28,7 @@ export default function App() {
   },[socket]);
 
   socket.on("connect", () => { // on connection something will happen here
-      setSocketId(socket.id);
-
+    setSocketId(socket.id);
 
         socket.on('receive', (data) => {
           console.log(data.message);
@@ -52,14 +51,6 @@ export default function App() {
         <button className='p-2'>Send</button>
       </form>
 
-
-      {/* <div className='mt-4'>
-        <form onSubmit={SendToIndivisual} className='flex gap-4' >
-        <input type="text" name="" id="" placeholder='Type message'  className='bg-white p-2 text-black' />
-        <button>Send to </button>
-        <input type="text" name="" id="" placeholder='Socket id'  className='bg-white p-2 text-black' />
-      </form>
-      </div> */}
     </div>
   )
 }
