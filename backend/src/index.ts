@@ -17,14 +17,18 @@ const io = new Server(server, {
 io.on('connection', (socket) => { 
     
     socket.broadcast.emit('New user join', `${socket.id} is just joined`);
-    
+
     socket.on('greetings', (data) => {
         console.log(data.message);
     })
 
     socket.on('message', (data) => {
         console.log(data.message, socket.id);
+        socket.to(data.toSend).emit('receive', {
+            message: data.message
+        })
     })
+
 
 })
 
