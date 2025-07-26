@@ -5,7 +5,7 @@ import {io, Socket} from 'socket.io-client';
 export default function App() {
   const [message, setMessage] = useState("");
   const [socketId, setSocketId] = useState<string | undefined>(undefined);
-  const [toSend, setToSend] = useState<string>("");
+  const [toSend, setToSend] = useState<string | undefined>();
   const socket: Socket = useMemo(() => {
     return io('http://localhost:3000', {
       autoConnect: false
@@ -21,11 +21,6 @@ export default function App() {
     })
 
   }
-
- 
-  // socket.emit('greetings', {
-  //   message: "Hi there"
-  // });
 
   useEffect(() => {
     socket.connect(); // now the connection is build
