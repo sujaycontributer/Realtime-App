@@ -20,6 +20,7 @@ io.on('connection', (socket) => {
     socket.on('message', (data) => {
         console.log(data.message, socket.id);
     });
+    socket.broadcast.emit('New user join', `${socket.id} is just joined`);
 });
 const port = 3000;
 server.listen(port, () => console.log(`Server is running on ${port}`));
