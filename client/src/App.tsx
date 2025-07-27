@@ -42,7 +42,7 @@ export default function App() {
   return (
     <div className='w-full bg-black h-screen p-4 text-white'>
       <span>Socket id: {socketId} </span>  
-      <form action="" onSubmit={handler} className='flex gap-2'>
+      <form onSubmit={handler} className='flex gap-2'>
         <input className='bg-white text-black p-2 items-center ' type="text" name="" value={message} placeholder='Type message' onChange={(e) => setMessage(e.target.value)} />
         <label htmlFor="" className='ml-4 flex gap-4 text-white '>
           <span>to</span> 
