@@ -21,7 +21,7 @@ export class UserManager {
 
     private createHandler(roomId: string, socket: Socket){
         socket.on('submission', (data) => {
-            
+            const type = data.type;
         })
     }
 
