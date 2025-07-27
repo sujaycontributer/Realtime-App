@@ -3,10 +3,10 @@ import { Socket } from "socket.io";
 export class UserManager {
     private users: {
         roomId: string;
-        socket:Socket
-    }[]
+        socket:Socket;
+    }[];
 
-    constructor(){
+    constructor() {
         this.users = [];
     }
 
