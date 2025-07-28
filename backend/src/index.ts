@@ -35,7 +35,7 @@ import { IoManager } from './manager/IoManager';
 const io = IoManager.getIo();
 io.listen(3000);
 
-io.on('connection', (socket) => {
+io.on('connection', (client) => {
     // 3 admin events
     // 2 client events
 });

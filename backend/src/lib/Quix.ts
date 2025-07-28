@@ -11,17 +11,24 @@ interface Problem {
     }[]; 
 }
 
+interface User{
+    name: string;
+    id: string;
+}
+
 export class Quiz  {
-    private roomId: string;
+    public roomId: string;
     private hasStarted: Boolean;
     private problems: Problem[];
     private activeProblem: number;
+    private users: User[];
 
     constructor(roomId: string) {
         this.roomId = roomId;
         this.hasStarted = false;
         this.problems = [];
         this.activeProblem = 0;
+        this.users = [];
     }
 
     addProblem(problem: Problem) {
@@ -50,11 +57,29 @@ export class Quiz  {
                 message: "Quiz ended"
             })
         }
-
         
     }
 
-    
+    getRandomString() {
+        const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = ' ';
+        const charactersLength = characters.length;
+        for ( let i = 0; i < length; i++ ) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+
+    addUser() {
+        const id = this.getRandomString();
+        this.users.push({
+            name: "sujay",
+            id: id
+        });
+        return id;
+    }
+
+
 
 
 }
