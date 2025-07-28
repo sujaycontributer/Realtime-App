@@ -33,6 +33,13 @@ export class UserManager {
         socket.on('submit', (data) => {
             const userId = data.userId;
             const problemId = data.problemId;
+            const submission = data.submission;
+
+            if(submission!=0  || submission!=1 || submission!=2 || submission!=3) {
+                console.log( "Error is occursing while getting submission input"  + submission);
+                return;
+            }
+            this.quizManager.submit();
             
         })
 

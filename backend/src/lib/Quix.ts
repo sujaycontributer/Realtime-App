@@ -79,6 +79,10 @@ export class Quiz  {
         return id;
     }
 
+    submit(roomId: string, problemId: string, submission: 0 | 1 | 2 | 3) {
+        
+    } 
+
 
 
 
