@@ -2,7 +2,7 @@ import { Quiz } from "../lib/Quix";
 import { IoManager } from "./IoManager";
 
 
-class QuizManager {
+export class QuizManager {
     private quizes: Quiz[];
 
     constructor(){
@@ -11,7 +11,17 @@ class QuizManager {
 
     public start(roomId: string) {
         const io = IoManager.getIo();
-        const quiz =  this.quizes.find(x => x.roomId === roomId);
-         
+        io.to(roomId).emit('join-room', {
+
+        });
+    }
+
+    addUser(roomId: string, name: string) {
+        return this.getQuiz(roomId)?.addUser(name);
+    }
+
+    getQuiz(roomId: string) {
+        return this.quizes.find(x => x.roomId === roomId) ?? null;
+
     }
 }

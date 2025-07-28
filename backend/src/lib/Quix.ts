@@ -70,11 +70,11 @@ export class Quiz  {
         return result;
     }
 
-    addUser() {
+    addUser(name: string) {
         const id = this.getRandomString();
         this.users.push({
-            name: "sujay",
-            id: id
+            name,
+            id
         });
         return id;
     }
