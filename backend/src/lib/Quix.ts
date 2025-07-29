@@ -1,22 +1,33 @@
 import { IoManager } from "../manager/IoManager";
 
+export type AllowedSubmissions = 0 | 1 | 2 | 3;
+
 interface Problem {
+    id: string;
     title: string;
     description : string;
     image?: string;
-    answer: string;
+    answer: AllowedSubmissions;
     options: {
         id: number;
         title: string;
     }[]; 
 }
 
-interface User{
+interface Submission {
+    userId: string;
+    problemId: string;
+    optionSelected: AllowedSubmissions;
+    isCorrect: boolean;
+}
+
+interface User {
     name: string;
     id: string;
 }
 
-export class Quiz  {
+
+export class Quiz {
     public roomId: string;
     private hasStarted: Boolean;
     private problems: Problem[];
@@ -80,7 +91,11 @@ export class Quiz  {
     }
 
     submit(roomId: string, problemId: string, submission: 0 | 1 | 2 | 3) {
+        const problem = this.problems.find (x => x.id === problemId);
         
+        if(problem) {
+            const exisitingSubmission = problem.submissions.find(x => )
+        }
     } 
 
 
