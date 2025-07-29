@@ -3,6 +3,7 @@ import cors from 'cors'
 import  http from 'http';
 import { Server } from 'socket.io';
 import { IoManager } from './manager/IoManager';
+import { Submission, User } from './lib/index';
 
 
 // const app = express();
@@ -35,9 +36,41 @@ import { IoManager } from './manager/IoManager';
 const io = IoManager.getIo();
 io.listen(3000);
 
+const users: User[] = [];
+const submissions: Submission[] = [];
+
 io.on('connection', (client) => {
     // 3 admin events
     // 2 client events
+
+
+    io.on('join-room', (data) => {
+        users.push({
+            id: data.id,
+            name: data.name,
+            type: data.type,
+            roomId: data.roomId
+        });
+        io.to(data.roomId);
+    });
+
+    client.on('submission', (data) => {
+        const user = data.id;
+        const problemId = data.problemId;
+        const ansId = data.ansId;
+        console.log(data);
+
+        submissions.push({
+            id: data.id,
+            problemId: data.problemId,
+            selectedId: data.selectedId
+
+        });
+        console.log(submissions);
+
+
+
+    })
 });
 
 
@@ -46,11 +79,4 @@ io.on('connection', (client) => {
 
 
 
-
-
-
-
-
-const port = 3000;
-server.listen(port, () => console.log(`Server is running on ${port}`));
 

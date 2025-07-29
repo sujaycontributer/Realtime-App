@@ -8,7 +8,11 @@ export class IoManager {
 
     public static getIo() {
         if(!this.io) {
-            const io = new Server(server);
+            const io = new Server(server, {
+                cors: {
+                    origin: 'http://localhost:5173'
+                }
+            });
             return this.io = io;
         }
         return this.io;
