@@ -12,6 +12,7 @@ interface Problem {
         id: number;
         title: string;
     }[]; 
+    submissions: Submission[];
 }
 
 interface Submission {
@@ -90,12 +91,11 @@ export class Quiz {
         return id;
     }
 
-    submit(roomId: string, problemId: string, submission: 0 | 1 | 2 | 3) {
+    submit(userId: string, roomId: string, problemId: string, submission: 0 | 1 | 2 | 3) {
         const problem = this.problems.find (x => x.id === problemId);
-        
-        if(problem) {
-            const exisitingSubmission = problem.submissions.find(x => )
-        }
+        const user = problem?.submissions
+
+       
     } 
 
 
