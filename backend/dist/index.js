@@ -27,7 +27,7 @@ const submissions = [];
 io.on('connection', (client) => {
     // 3 admin events
     // 2 client events
-    io.on('join-room', (data) => {
+    client.on('join-room', (data) => {
         users.push({
             id: data.id,
             name: data.name,

@@ -1,9 +1,6 @@
-import express from 'express';
-import cors from 'cors'
-import  http from 'http';
-import { Server } from 'socket.io';
 import { IoManager } from './manager/IoManager';
 import { Submission, User } from './lib/index';
+import { app } from './manager/IoManager';
 
 
 // const app = express();
@@ -44,33 +41,56 @@ io.on('connection', (client) => {
     // 2 client events
 
 
-    io.on('join-room', (data) => {
+    client.on('join-room', (data) => {
         users.push({
             id: data.id,
             name: data.name,
             type: data.type,
             roomId: data.roomId
         });
-        io.to(data.roomId);
+        
+        client.join(data.roomId);
+
+        client.to(data.roomId).emit('message', {
+            message: `${name} has joined the room`
+        });
     });
 
     client.on('submission', (data) => {
-        const user = data.id;
+        const id = data.id;
         const problemId = data.problemId;
-        const ansId = data.ansId;
+        const selectedId = data.ansId;
         console.log(data);
 
         submissions.push({
-            id: data.id,
-            problemId: data.problemId,
-            selectedId: data.selectedId
+            id: id,
+            problemId: problemId,
+            selectedId: selectedId
 
         });
         console.log(submissions);
 
+    });
 
+    client.on('admin-problem', (data) => {
+        const roomId = data.roomId;
+        const problemId = data.id
+        const problem = data.problem;
+        const options = data.optios;
+        const correctAns = data.correctAns;
+        client.to(roomId).emit('user-problem', {
+            problemId,
+            problem,
+            options
+        });
+
+    });
+
+    client.on('show-leaderboad', (data) => {
 
     })
+
+
 });
 
 
