@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const IoManager_1 = require("./manager/IoManager");
 const IoManager_2 = require("./manager/IoManager");
+const IoManager_3 = require("./manager/IoManager");
 // const app = express();
 // const server = http.createServer(app);
 // const io = new Server(server, {
@@ -22,9 +23,12 @@ const IoManager_2 = require("./manager/IoManager");
 //     })
 // })
 const io = IoManager_1.IoManager.getIo();
-io.listen(3000);
+IoManager_3.server.listen(3000);
 const users = [];
 const submissions = [];
+IoManager_2.app.get('/', (req, res) => {
+    res.send("Hi there");
+});
 io.on('connection', (client) => {
     // 3 admin events
     // 2 client events
@@ -65,9 +69,6 @@ io.on('connection', (client) => {
         });
     });
     client.on('show-leaderboad', (data) => {
+        // send users to show leaderboad
     });
 });
-IoManager_2.app.get('/', (req, res) => {
-    res.send('hi there');
-});
-IoManager_2.app.listen(3000);

@@ -22,9 +22,15 @@ model Problemset {
 
 }
 
-model Problem {
+model problem {
   id              String   @id @default(ulid())
   problemSet      Problemset   @relation(fields: [problemSetId], references: [id])
-  problemSetId    String 
+  problemSetId    String
+  problemName         String
+  optionA         String 
+  optionB         String 
+  optionC         String 
+  optionD         String 
+
 
 }

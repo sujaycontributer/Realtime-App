@@ -1,6 +1,7 @@
 import { IoManager } from './manager/IoManager';
 import { Submission, User } from './lib/index';
 import { app } from './manager/IoManager';
+import {server} from './manager/IoManager'
 
 
 // const app = express();
@@ -31,10 +32,11 @@ import { app } from './manager/IoManager';
 // })
 
 const io = IoManager.getIo();
-io.listen(3000);
+server.listen(3000);
 
 const users: User[] = [];
 const submissions: Submission[] = [];
+
 
 io.on('connection', (client) => {
     // 3 admin events
@@ -90,8 +92,8 @@ io.on('connection', (client) => {
         // send users to show leaderboad
     });
 
-
 });
+
 
 
 
