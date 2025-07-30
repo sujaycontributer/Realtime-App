@@ -87,8 +87,8 @@ io.on('connection', (client) => {
     });
 
     client.on('show-leaderboad', (data) => {
-
-    })
+        // send users to show leaderboad
+    });
 
 
 });
