@@ -3,7 +3,6 @@ import { useEffect, useMemo, useState, type FormEvent } from 'react';
 import {io, Socket} from 'socket.io-client';
 
 export default function App() {
-  const [message, setMessage] = useState("");
   const [socketId, setSocketId] = useState<string | undefined>(undefined);
   const [toSend, setToSend] = useState<string | undefined>();
   const socket: Socket = useMemo(() => {
