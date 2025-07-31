@@ -18,19 +18,18 @@ datasource db {
 model Problemset {
   id                String @id @default(uuid()) 
   setName           String
-  problems          Problem []         
+  problems          problem []         
 
 }
 
 model problem {
-  id              String   @id @default(ulid())
-  problemSet      Problemset   @relation(fields: [problemSetId], references: [id])
-  problemSetId    String
-  problemName         String
-  optionA         String 
-  optionB         String 
-  optionC         String 
-  optionD         String 
-
+  id                String   @id @default(ulid())
+  problemSet        Problemset   @relation(fields: [problemSetId], references: [id])
+  problemSetId      String
+  problemName       String
+  optionA           String 
+  optionB           String 
+  optionC           String 
+  optionD           String 
 
 }

@@ -1,6 +1,5 @@
 import { IoManager } from './manager/IoManager';
 import { Submission, User } from './lib/index';
-import { app } from './manager/IoManager';
 import {server} from './manager/IoManager'
 
 
@@ -42,6 +41,21 @@ io.on('connection', (client) => {
     // 3 admin events
     // 2 client events
 
+     client.on('checkRoomExistence', (roomId) => {
+        const room = io.sockets.adapter.rooms.get(roomId); // if not exist, return undefined
+
+        if (room) {
+            // The room exists and has at least one socket in it
+            const numberOfClients = room.size;
+            console.log(`Room '${roomId}' exists with ${numberOfClients} client(s).`);
+            client.emit('room-status', { roomId, exists: true, clients: numberOfClients });
+        } else {
+            // The room does not exist (no sockets are currently in it)
+            console.log(`Room '${roomId}' does not exist or is empty.`);
+            client.emit('room-status', { roomId, exists: false, clients: 0 });
+        }
+     });
+        
 
     client.on('join-room', (data) => {
         users.push({
