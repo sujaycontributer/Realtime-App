@@ -6,18 +6,6 @@ import Admin from "./components/Admin";
 
 export default function App() {
   
-  // const handler = (e:FormEvent) => {
-  //   e.preventDefault();
-  //   socket?.emit('message', {
-  //     message: message,
-  //     toSend: toSend
-      
-  //   })
-
-  // }
-
-
-
   return (
    <div>
       <BrowserRouter>
