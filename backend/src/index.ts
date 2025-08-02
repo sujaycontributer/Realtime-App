@@ -29,6 +29,9 @@ import {server} from './manager/IoManager'
 
 
 // })
+const problems = [
+    {}
+]
 
 const io = IoManager.getIo();
 server.listen(3000);
@@ -67,8 +70,8 @@ io.on('connection', (client) => {
         
         client.join(data.roomId);
 
-        client.to(data.roomId).emit('message', {
-            message: `${name} has joined the room`
+        io.to(data.roomId).emit('message', {
+            message: `sujay has joined the room`
         });
     });
 

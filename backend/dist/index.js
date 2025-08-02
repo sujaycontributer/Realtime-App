@@ -21,6 +21,9 @@ const IoManager_2 = require("./manager/IoManager");
 //         })
 //     })
 // })
+const problems = [
+    {}
+];
 const io = IoManager_1.IoManager.getIo();
 IoManager_2.server.listen(3000);
 const users = [];
@@ -33,7 +36,7 @@ io.on('connection', (client) => {
         if (room) {
             // The room exists and has at least one socket in it
             const numberOfClients = room.size;
-            console.log(`Room '${roomId}' exists with ${numberOfClients} client(s).`);
+            console.log(`Room '${roomId}' exist with ${numberOfClients} client(s).`);
             client.emit('room-status', { roomId, exists: true, clients: numberOfClients });
         }
         else {
@@ -50,8 +53,8 @@ io.on('connection', (client) => {
             roomId: data.roomId
         });
         client.join(data.roomId);
-        client.to(data.roomId).emit('message', {
-            message: `${name} has joined the room`
+        io.to(data.roomId).emit('message', {
+            message: `sujay has joined the room`
         });
     });
     client.on('submission', (data) => {

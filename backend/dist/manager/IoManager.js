@@ -14,7 +14,7 @@ class IoManager {
         if (!this.io) {
             const io = new socket_io_1.Server(exports.server, {
                 cors: {
-                    origin: 'http://localhost:5173',
+                    origin: '*',
                     methods: ["GET", "POST"]
                 }
             });
