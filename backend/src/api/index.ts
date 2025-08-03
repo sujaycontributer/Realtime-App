@@ -26,14 +26,9 @@ app.post('/problemset', async (req, res) => {
 });
 
 app.get('/problemset', async (req, res) => {
-    const {setName} = req.body;
 
     try {
-        const problems = await prisma?.problemset.findFirst({
-            where: {
-                setName: setName
-            }
-        });
+        const problems = await prisma?.problemset.findMany({});
         return res.status(200).json({
             problemSet: problems 
         });
