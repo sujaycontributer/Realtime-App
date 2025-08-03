@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { server, app } from "../manager/IoManager";
+import { app } from "../manager/IoManager";
 import prisma from "../lib/prisma";
 
 
@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send("Hi there")
+    res.send("Hey 🤡!");
 });
 
 app.post('/problemset', async (req, res) => {
