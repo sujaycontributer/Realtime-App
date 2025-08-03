@@ -7,7 +7,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 else {
     if (!global.prisma) {
-        prisma = new client_1.PrismaClient();
+        global.prisma = new client_1.PrismaClient();
     }
     prisma = global.prisma;
 }

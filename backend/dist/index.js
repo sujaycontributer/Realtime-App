@@ -1,31 +1,17 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const cors_1 = __importDefault(require("cors"));
 const IoManager_1 = require("./manager/IoManager");
 const IoManager_2 = require("./manager/IoManager");
-// const app = express();
-// const server = http.createServer(app);
-// const io = new Server(server, {
-//     cors: {
-//         origin:'http://localhost:5173'
-//     }
-// });
-// io.on('connection', (socket) => { 
-//     socket.broadcast.emit('New user join', `${socket.id} is just joined`);
-//     socket.on('greetings', (data) => {
-//         console.log(data.message);
-//     })
-//     socket.on('message', (data) => {
-//         console.log(data.message, socket.id);
-//         socket.to(data.toSend).emit('receive', {
-//             message: data.message
-//         })
-//     })
-// })
-const problems = [
-    {}
-];
+require("./api/index");
 const io = IoManager_1.IoManager.getIo();
-IoManager_2.server.listen(3000);
+IoManager_1.app.use((0, cors_1.default)());
+IoManager_2.server.listen(3000, () => {
+    console.log("Server is running on port 3000");
+});
 const users = [];
 const submissions = [];
 io.on('connection', (client) => {

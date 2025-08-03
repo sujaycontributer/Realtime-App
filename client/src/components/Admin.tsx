@@ -46,8 +46,8 @@ export default function Admin() {
   };
 
   socket.on('message', (message) => {
-    console.log(message)
     setMessage(message.message);
+
     setTimeout(() => {
       setMessage("");
     }, 1000);

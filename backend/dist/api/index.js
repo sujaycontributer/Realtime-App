@@ -13,11 +13,44 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const IoManager_1 = require("../manager/IoManager");
-const prisms_1 = __importDefault(require("../lib/prisms"));
+const prisma_1 = __importDefault(require("../lib/prisma"));
+const express_1 = __importDefault(require("express"));
+IoManager_1.app.use(express_1.default.json());
+IoManager_1.app.get('/', (req, res) => {
+    res.send("Hi there");
+});
+IoManager_1.app.post('/problemset', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { setName } = req.body;
+    const problemSet = yield (prisma_1.default === null || prisma_1.default === void 0 ? void 0 : prisma_1.default.problemset.create({
+        data: {
+            setName: setName
+        }
+    }));
+    return res.status(200).json({
+        message: "Problem is created!",
+        problemSet
+    });
+}));
+IoManager_1.app.get('/problemset', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { setName } = req.body;
+    try {
+        const problems = yield (prisma_1.default === null || prisma_1.default === void 0 ? void 0 : prisma_1.default.problemset.findFirst({
+            where: {
+                setName: setName
+            }
+        }));
+        return res.status(200).json({
+            problemSet: problems
+        });
+    }
+    catch (err) {
+        return res.status(500).json("Error while finding problem set" + err.message);
+    }
+}));
 IoManager_1.app.post('/problem', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { problemSetId, problemName, options } = req.body;
     try {
-        yield (prisms_1.default === null || prisms_1.default === void 0 ? void 0 : prisms_1.default.problem.create({
+        yield (prisma_1.default === null || prisma_1.default === void 0 ? void 0 : prisma_1.default.problem.create({
             data: {
                 problemSetId,
                 problemName,
@@ -29,11 +62,9 @@ IoManager_1.app.post('/problem', (req, res) => __awaiter(void 0, void 0, void 0,
         }));
     }
     catch (error) {
-        res.send("Error while creating problem" + error);
+        res.status(500).json("Error while creating problem" + error);
     }
     res.status(200).json({
         message: "Problem created!"
     });
-}));
-IoManager_1.app.post('/problemset', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 }));

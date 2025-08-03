@@ -1,40 +1,13 @@
-import { IoManager } from './manager/IoManager';
+
+import { IoManager, app } from './manager/IoManager';
 import { Submission, User } from './lib/index';
 import {server} from './manager/IoManager'
-
-
-// const app = express();
-// const server = http.createServer(app);
-// const io = new Server(server, {
-//     cors: {
-//         origin:'http://localhost:5173'
-//     }
-// });
-
-
-// io.on('connection', (socket) => { 
-    
-//     socket.broadcast.emit('New user join', `${socket.id} is just joined`);
-
-//     socket.on('greetings', (data) => {
-//         console.log(data.message);
-//     })
-
-//     socket.on('message', (data) => {
-//         console.log(data.message, socket.id);
-//         socket.to(data.toSend).emit('receive', {
-//             message: data.message
-//         })
-//     })
-
-
-// })
-const problems = [
-    {}
-]
+import './api/index'
 
 const io = IoManager.getIo();
-server.listen(3000);
+server.listen(3000, () => {
+    console.log("Server is running on port 3000");
+});
 
 const users: User[] = [];
 const submissions: Submission[] = [];
