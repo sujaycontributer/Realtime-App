@@ -28,9 +28,13 @@ app.post('/problemset', async (req, res) => {
 app.get('/problemset', async (req, res) => {
 
     try {
-        const problems = await prisma?.problemset.findMany({});
+        const allProblem = await prisma?.problemset.findMany({
+            include: {
+                problems: true
+            }
+        });
         return res.status(200).json({
-            problemSet: problems 
+            problemSet: allProblem 
         });
 
     } catch (err) {
