@@ -20,7 +20,7 @@ export default function Quiz() {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen p-4 flex items-center justify-center">
+    <div className="bg-gray-100 max-h-screen p-4 flex items-center justify-center">
       <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-2xl mx-auto">
         <h2 className="text-xl md:text-2xl font-bold text-center text-gray-800 mb-6">Which planet is a home to human life?</h2>
         <QuizOptions 
