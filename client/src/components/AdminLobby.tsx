@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useRef, useState } from "react"
 import { quizContext } from "../context/QuizDataProvider"
 import  type {ProblemInterface} from "../types";
 import Quiz from "./Quiz";
@@ -6,6 +6,23 @@ import Quiz from "./Quiz";
 function AdminLobby() {
   const {problems} = useContext(quizContext);
   const [currentProblem, setCurrentProblem] = useState<ProblemInterface | {}>({});
+  const indexRef = useRef(0);
+
+
+  const nextQuestionHandler = () => {
+    if(indexRef.current + 1 < problems.length) {
+      indexRef.current = indexRef.current + 1;
+      setCurrentProblem(problems[indexRef.current]);
+    }
+  }
+
+  const showQuestionHandler = () => { // trigger the emmit of current question
+    
+  }
+
+  const showLeaderBoadHandler = () => { // trigger the emmit of current question's leaderboard
+    
+  }
 
   return (
     <div className={` bg-gray-100 min-h-screen w-full `}>
@@ -15,16 +32,22 @@ function AdminLobby() {
           <Quiz />
         </section>
   
-        <section className="flex justify-center items-center gap-10 h-[100px]">
-          <button className="bg-gray-800 font-semibold text-gray-200 p-2 rounded-lg shadow-lg  hover:bg-gray-700">
+        <section className="flex justify-center items-center gap-10 p-2 h-[100px]">
+          <button 
+          onClick={nextQuestionHandler}
+          className="bg-gray-800 font-semibold text-gray-200 md:p-2 rounded-lg shadow-lg  hover:bg-gray-700">
             Next question
           </button>
             
-          <button className="bg-gray-800 font-semibold text-gray-200 shadow-lg p-2 rounded-lg hover:bg-gray-700">
+          <button
+          onClick={showQuestionHandler} 
+          className="bg-gray-800 font-semibold text-gray-200 shadow-lg md:p-2 rounded-lg hover:bg-gray-700">
             Show question
           </button>
             
-          <button className="bg-green-700 font-semibold text-gray-200 shadow-lg p-2 rounded-lg hover:bg-gray-700">
+          <button 
+          onClick={showLeaderBoadHandler}
+          className="bg-green-700 font-semibold text-gray-200 shadow-lg md:p-2 rounded-lg hover:bg-gray-700">
             Show leaderboad
           </button>
         </section>

@@ -6,7 +6,7 @@ export default function Quiz() {
   const [isSelect, setIsSelect] = useState<boolean>(false);
 
   // Updated to have only four options
-  const quizOptions = [
+  const quizOptions = [   // have to add real questions from the quiz context
     'Mars',
     'Jupiter',
     'Earth is the third planet from the Sun.',

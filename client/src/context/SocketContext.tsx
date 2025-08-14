@@ -9,7 +9,7 @@ interface SocketContextInterface {
     disconnectSocket: () => void,
 }
 
-const SocketContext = createContext<SocketContextInterface>({
+export const SocketContext = createContext<SocketContextInterface>({
   socket: null,
   isConnected: false,
   connectSocket: () => {},
@@ -51,6 +51,7 @@ export default function SocketProvider({ children }: { children: ReactNode }) {
 
   // Functions to manually control the connection
   const connectSocket = () => {
+    console.log("Connection request");
     if (socket && !socket.connected) {
       socket.connect();
     }
