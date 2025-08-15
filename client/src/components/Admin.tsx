@@ -15,12 +15,12 @@ export default function Admin() {
   socket?.on('room-status', (room) => {
       if (!room.exits) {
         console.log("Room is not exist");
-        // socket.emit('join-room', {
-        //   id: socket.id,
-        //   name: "sujay",
-        //   type: "admin",
-        //   roomId: roomIdRef.current?.value
-        // });
+        socket.emit('join-room', {
+          id: socket.id,
+          name: "sujay",
+          type: "admin",
+          roomId: roomIdRef.current?.value
+        });
         navigate(`/admin/${roomIdRef.current?.value}`);
 
 
