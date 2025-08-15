@@ -15,6 +15,7 @@ export default function App() {
       <Routes>
         <Route path="/join" element={<Lobby />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/admin/:roomId" element={<AdminLobby />} />
         <Route path="/problemset" element={<ProblemSet />} /> 
         <Route path="/quiz" element={<Quiz/> } />
       </Routes>

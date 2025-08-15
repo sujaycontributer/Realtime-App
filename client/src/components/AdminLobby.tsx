@@ -1,13 +1,17 @@
 import { useContext, useRef, useState } from "react"
 import { quizContext } from "../context/QuizDataProvider"
-import  type {ProblemInterface} from "../types";
+import { useParams } from "react-router-dom";
+import { SocketContext } from "../context/SocketContext";
 import Quiz from "./Quiz";
+import type {ProblemInterface} from "../types";
+
 
 function AdminLobby() {
+  const {roomId} = useParams();
   const {problems} = useContext(quizContext);
+  const {socket} = useContext(SocketContext);
   const [currentProblem, setCurrentProblem] = useState<ProblemInterface | {}>({});
   const indexRef = useRef(0);
-
 
   const nextQuestionHandler = () => {
     if(indexRef.current + 1 < problems.length) {
@@ -17,7 +21,9 @@ function AdminLobby() {
   }
 
   const showQuestionHandler = () => { // trigger the emmit of current question
-    
+    socket?.emit('question', {
+      problem: currentProblem
+    });
   }
 
   const showLeaderBoadHandler = () => { // trigger the emmit of current question's leaderboard
