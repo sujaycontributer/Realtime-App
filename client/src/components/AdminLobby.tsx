@@ -22,12 +22,15 @@ function AdminLobby() {
 
   const showQuestionHandler = () => { // trigger the emmit of current question
     socket?.emit('question', {
+      roomId: roomId,
       problem: currentProblem
     });
   }
 
   const showLeaderBoadHandler = () => { // trigger the emmit of current question's leaderboard
-    
+    socket?.emit('show-leaderboad', {
+      roomId: roomId
+    } )
   }
 
   return (
