@@ -1,49 +1,95 @@
-import axios from 'axios'
-import { useContext, useEffect, useState } from 'react'
+import axios from 'axios';
+import { useContext, useEffect, useState } from 'react';
 import { quizContext } from '../context/QuizDataProvider';
 
+interface Problem {
+  id: string;
+  problemSetId: string;
+  problemName: string;
+  optionA: string;
+  optionB: string;
+  optionC: string;
+  optionD: string;
+}
+
 interface SetInterface {
-    id: string;
-    setName: string;
-    problems: {
-      id: string;
-      problemSetId: string;
-      problemName: string;
-      optionA: string;
-      optionB: string;
-      optionC: string;
-      optionD: string;
-    }[]
+  id: string;
+  setName: string;
+  problems: Problem[];
+}
+
+interface QuizContextType {
+  problems: Problem[];
+  setProblems: (problems: Problem[]) => void;
 }
 
 export default function ProblemSet() {
-    const [problemSet, setProblemSet] = useState<SetInterface[]>([]);
-    //@ts-ignore
-    const {problems, setProblems} = useContext(quizContext);
-    
-    useEffect(() => {
-      const getProblemSets = async () => {
-        const problems = await axios.get('http://localhost:3000/problemset');
-        // console.log(problems.data.problemSet);
-        setProblemSet(problems.data.problemSet);
-      }
-      
-      getProblemSets();
+  const [problemSets, setProblemSets] = useState<SetInterface[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-    }, []);
+  const { setProblems } = useContext(quizContext) as QuizContextType;
+
+  useEffect(() => {
+    const getProblemSets = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('http://localhost:3000/problemset');
+        if (response.data && response.data.problemSet) {
+          setProblemSets(response.data.problemSet);
+        } else {
+          setError('Invalid data format from API.');
+        }
+      } catch (err) {
+        setError('Failed to fetch problem sets. Please try again later.');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    getProblemSets();
+  }, []);
+
+  const handleSelectSet = (problems: Problem[]) => {
+    setProblems(problems);
+  };
 
   return (
-    <div className='bg-gray-200 max-w-2xl min-h-[400px] p-4 rounded-md'>
-      <h1 className='p-2 text-xl font-serif font-semibold text-gray-800 text-center'>Choose your problem set</h1>
-      <div className='max-h-[400px] flex flex-col gap-4 mt-4 overflow-y-scroll hide-scrollbar scroll-smooth'>
-        {problemSet.length > 0 && problemSet.map((set:any) => <button key={set.id} className='text-neutral-200 transition-all duration-200 text-lg bg-gray-700 hover:bg-gray-800 py-6 rounded-lg' onClick={() => {
-          setProblems(set.problem)
-        } }> {set.setName} </button>)}
+    <div className='bg-white max-w-2xl min-h-[400px] p-6 rounded-3xl shadow-lg'>
+      <h1 className='p-2 text-3xl font-bold font-sans text-gray-900 text-center mb-6 tracking-wide'>
+        Choose Your Problem Set
+      </h1>
+      
+      <div className='max-h-[400px] flex flex-col gap-5 mt-4 overflow-y-scroll hide-scrollbar scroll-smooth'>
+        {loading && <p className='text-center text-gray-600'>Loading problem sets...</p>}
+        {error && <p className='text-center text-red-500 font-medium'>Error: {error}</p>}
+        
+        {!loading && !error && problemSets.length === 0 && (
+          <p className='text-center text-gray-600'>No problem sets available.</p>
+        )}
+        
+        {!loading && problemSets.length > 0 && problemSets.map((set) => (
+          <button
+            key={set.id}
+            className='
+              text-gray-800 transition-all duration-300 text-xl font-medium 
+              py-6 rounded-2xl shadow-md
+              bg-gradient-to-r from-pink-100 to-blue-100
+              hover:from-pink-200 hover:to-blue-200 
+              hover:shadow-xl hover:scale-[1.01]
+              active:scale-[0.98]
+              focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-50
+            '
+            onClick={() => handleSelectSet(set.problems)}
+          >
+            {set.setName}
+          </button>
+        ))}
       </div>
     </div>
-  )
+  );
 }
-
 
 
 

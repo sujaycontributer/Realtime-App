@@ -1,5 +1,6 @@
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import axios from 'axios'
+import { useParams } from 'react-router-dom';
 
 // Define the type for our form data
 type FormData = {
@@ -12,7 +13,8 @@ type FormData = {
 
 // Main App component containing the form
 const CreateProblem = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
+  const {setId} = useParams();
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>();
 
   // Handle form submission
   const onSubmit: SubmitHandler<FormData> = async (data) => {
@@ -20,10 +22,11 @@ const CreateProblem = () => {
 
     console.log('Form data submitted:', data);
     await axios.post('http://localhost:3000/problem', {
-      problemSetId: "e921bfe0-9341-426f-8df4-d17f05b0055a",
+      problemSetId: setId,
       problemName: data.problemName,
       options: [data.optionA, data.optionB, data.optionC, data.optionC]
     });
+    reset();
     alert("Set created");
 
   };
