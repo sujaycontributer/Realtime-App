@@ -31,5 +31,6 @@ model problem {
   optionB           String 
   optionC           String 
   optionD           String 
+  ans               String
 
 }

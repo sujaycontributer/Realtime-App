@@ -30,9 +30,11 @@ export default function ClinetLobby() {
 
 
   return (
-    <div  className="h-screen flex flex-col justify-center items-center  bg-gray-100">
+    <div  className="min-h-screen w-full flex flex-col justify-center items-center bg-gray-100">
       <h1>Wait for admin to start ...</h1>
-      <Quiz question={problem} />
+      <section className="mt-8">
+        <Quiz question={problem} />
+      </section>
     </div>
   )
 }

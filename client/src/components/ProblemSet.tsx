@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { quizContext } from '../context/QuizDataProvider';
+import { useNavigate } from 'react-router-dom';
 
 interface Problem {
   id: string;
@@ -23,10 +24,11 @@ interface QuizContextType {
   setProblems: (problems: Problem[]) => void;
 }
 
-export default function ProblemSet() {
+export default function ProblemSet({roomExist}: {roomExist?:boolean}) {
   const [problemSets, setProblemSets] = useState<SetInterface[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const { setProblems } = useContext(quizContext) as QuizContextType;
 
@@ -51,8 +53,11 @@ export default function ProblemSet() {
     getProblemSets();
   }, []);
 
-  const handleSelectSet = (problems: Problem[]) => {
-    setProblems(problems);
+  const handleSelectSet = (problems: Problem[], id: string) => {
+    if(roomExist) setProblems(problems);
+    else {
+      navigate(`/set/${id}`);
+    }
   };
 
   return (
@@ -81,7 +86,7 @@ export default function ProblemSet() {
               active:scale-[0.98]
               focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-50
             '
-            onClick={() => handleSelectSet(set.problems)}
+            onClick={() => handleSelectSet(set.problems, set.id)}
           >
             {set.setName}
           </button>

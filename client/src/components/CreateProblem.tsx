@@ -9,6 +9,7 @@ type FormData = {
   optionB: string;
   optionC: string;
   optionD: string;
+  ansOption: string;
 };
 
 // Main App component containing the form
@@ -18,13 +19,12 @@ const CreateProblem = () => {
 
   // Handle form submission
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    // This function will be called with your valid form data     const {problemSetId, problemName, options} = req.body;
-
+    // This function will be called with your valid form data
     console.log('Form data submitted:', data);
     await axios.post('http://localhost:3000/problem', {
       problemSetId: setId,
       problemName: data.problemName,
-      options: [data.optionA, data.optionB, data.optionC, data.optionC]
+      options: [data.optionA, data.optionB, data.optionC, data.optionD, data.ansOption]
     });
     reset();
     alert("Set created");
@@ -100,6 +100,19 @@ const CreateProblem = () => {
               className={`w-full px-4 py-2 bg-gray-50 border rounded-lg shadow-sm focus:outline-none focus:ring-2 transition duration-150 ${errors.optionD ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-indigo-500 focus:border-indigo-500'}`}
             />
             {errors.optionD && <span className="text-red-500 text-sm mt-1 block">This field is required</span>}
+          </div>
+          
+          {/* New Ans Option Input with validation */}
+          <div>
+            <label htmlFor="ansOption" className="block text-sm font-semibold text-gray-700 mb-1">
+              Answer Option
+            </label>
+            <input
+              placeholder="e.g., B"
+              {...register("ansOption", { required: true })}
+              className={`w-full px-4 py-2 bg-gray-50 border rounded-lg shadow-sm focus:outline-none focus:ring-2 transition duration-150 ${errors.ansOption ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-indigo-500 focus:border-indigo-500'}`}
+            />
+            {errors.ansOption && <span className="text-red-500 text-sm mt-1 block">This field is required</span>}
           </div>
 
           {/* Submit Button */}

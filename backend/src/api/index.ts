@@ -55,7 +55,8 @@ app.post('/problem', async (req, res) => {
                 optionA:options[0],          
                 optionB:options[1],          
                 optionC:options[2],          
-                optionD:options[3] 
+                optionD:options[3], 
+                ans: options[4]
             }
         });
     } catch (error) {
