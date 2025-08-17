@@ -1,17 +1,20 @@
 import { useState } from 'react';
+import type {ProblemInterface} from '../types'
+
 
 // Main App component to demonstrate the QuizOptions component
-export default function Quiz() {
+export default function Quiz({question}: {question?: ProblemInterface | undefined} ) {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isSelect, setIsSelect] = useState<boolean>(false);
 
   // Updated to have only four options
   const quizOptions = [   // have to add real questions from the quiz context
-    'Mars',
-    'Jupiter',
-    'Earth is the third planet from the Sun.',
-    'Neptune'
+    question?.optionA,
+    question?.optionB,
+    question?.optionC,
+    question?.optionD
   ];
+  
 
   const handleOptionSelect = (option: any) => {
     setSelectedOption(option);
@@ -22,7 +25,7 @@ export default function Quiz() {
   return (
     <div className="bg-gray-100 max-h-screen p-4 flex items-center justify-center">
       <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-2xl mx-auto">
-        <h2 className="text-xl md:text-2xl font-bold text-center text-gray-800 mb-6">Which planet is a home to human life?</h2>
+        <h2 className="text-xl md:text-2xl font-bold text-center text-gray-800 mb-6">{question?.problemName}</h2>
         <QuizOptions 
           options={quizOptions} 
           isSelect={isSelect}

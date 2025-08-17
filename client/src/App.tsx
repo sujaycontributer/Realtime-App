@@ -4,6 +4,8 @@ import ProblemSet from "./components/ProblemSet";
 import AdminLobby from "./components/AdminLobby";
 import Quiz from "./components/Quiz";
 import Admin from "./components/Admin";
+import ClinetLobby from "./components/ClinetLobby";
+import CreateProblem from "./components/CreateProblem";
 
 
 
@@ -14,9 +16,12 @@ export default function App() {
       <BrowserRouter>
       <Routes>
         <Route path="/join" element={<Lobby />} />
+        <Route path="/join/:roomId" element={<ClinetLobby />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/:roomId" element={<AdminLobby />} />
         <Route path="/problemset" element={<ProblemSet />} /> 
+        <Route path="/set/:setId" element={<CreateProblem />} />
+        <Route path="/set" element={<div/>} />
         <Route path="/quiz" element={<Quiz/> } />
       </Routes>
       </BrowserRouter>

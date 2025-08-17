@@ -11,7 +11,7 @@ type FormData = {
 };
 
 // Main App component containing the form
-const App = () => {
+const CreateProblem = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
 
   // Handle form submission
@@ -112,4 +112,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default CreateProblem;

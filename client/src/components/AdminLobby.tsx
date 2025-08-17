@@ -10,7 +10,13 @@ function AdminLobby() {
   const {roomId} = useParams();
   const {problems} = useContext(quizContext);
   const {socket} = useContext(SocketContext);
-  const [currentProblem, setCurrentProblem] = useState<ProblemInterface | {}>({});
+  const [currentProblem, setCurrentProblem] = useState<ProblemInterface | undefined>({id: "Fsd",
+  problemName: "Dummy problem",
+  problemSetId: "some-set-id-123",
+  optionA: "Option A content here",
+  optionB: "Option B content here",
+  optionC: "Option C content here",
+  optionD: "Option D content here"});
   const indexRef = useRef(0);
 
   const nextQuestionHandler = () => {
@@ -21,15 +27,23 @@ function AdminLobby() {
   }
 
   const showQuestionHandler = () => { // trigger the emmit of current question
-    socket?.emit('question', {
+    socket?.emit('question-request', {
       roomId: roomId,
-      problem: currentProblem
+      problem: {
+      id: "Fsd",
+      problemName: "Dummy problem",
+      problemSetId: "some-set-id-123",
+      optionA: "Option A content here",
+      optionB: "Option B content here",
+      optionC: "Option C content here",
+      optionD: "Option D content here"}
     });
   }
 
   const showLeaderBoadHandler = () => { // trigger the emmit of current question's leaderboard
     socket?.emit('show-leaderboad', {
-      roomId: roomId
+      roomId: roomId,
+      problem: currentProblem
     } )
   }
 
@@ -38,7 +52,7 @@ function AdminLobby() {
         <h1 className="text-md text-center p-2 ">Wait for admin to start ...</h1>
 
         <section className="mt-8">
-          <Quiz />
+          <Quiz question={currentProblem} />
         </section>
   
         <section className="flex justify-center items-center gap-10 p-2 h-[100px]">

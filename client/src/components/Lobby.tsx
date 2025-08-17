@@ -1,32 +1,32 @@
-import { useMemo, useState } from 'react';
-import {io, Socket} from 'socket.io-client';
+import { useContext, useState } from 'react';
+import { SocketContext } from '../context/SocketContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function Lobby() {
-//   const [socketId, setSocketId] = useState<string | undefined>(undefined);
-//   const [toSend, setToSend] = useState<string | undefined>();
-const [roomId, setRoomId] = useState<string>("");
+    const {socket} = useContext(SocketContext);
+    const [roomId, setRoomId] = useState<string>("");
+    const navigate = useNavigate()
 
-  const socket: Socket = useMemo(() => {
-    return io('http://localhost:3000', {
-      autoConnect: false
-    });
-    
-  }, []); 
 
   const joinRoomHandler = () => {
-    socket.connect();
+    socket?.connect();
 
-    socket.emit('checkRoomExistence', roomId);
+    socket?.emit('checkRoomExistence', roomId);
 
-    socket.on('room-status', (room) => {
+    socket?.on('room-status', (room) => {
 
       if(room.exists) {
         console.log(`Room is exists,And the room id is ${room.roomId}`);
         socket.emit('join-room', {
-          id: socket.id,
+          socketId: socket.id,
           roomId: roomId 
         });
-      } else console.log(`This Room-id ${room.roomId} is not exists`);
+        
+        navigate(`/join/${roomId}`)
+      } else {
+                   console.log(`This Room-id ${room.roomId} is not exists`);
+
+      }
     });
 
   } 

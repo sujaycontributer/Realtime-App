@@ -35,7 +35,7 @@ io.on('connection', (client) => {
 
     client.on('join-room', (data) => {
         users.push({
-            id: data.id,
+            socketId: data.id,
             name: data.name,
             type: data.type,
             roomId: data.roomId
@@ -47,6 +47,12 @@ io.on('connection', (client) => {
             message: `sujay has joined the room`
         });
     });
+
+    client.on('question-request', (data) => {
+        client.to(data.roomId).emit('question', ({
+            problem: data.problem
+        }));
+    })
 
     client.on('submission', (data) => {
         const id = data.id;
