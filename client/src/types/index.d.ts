@@ -7,4 +7,5 @@ export interface ProblemInterface {
     optionB: string;
     optionC: string;
     optionD: string;
+    ans: string;
 }

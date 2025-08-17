@@ -7,7 +7,8 @@ export interface User {
 }
 
 export interface Submission {
-    id: string;
-    problemId: number;
-    selectedId: number;
+    socketId: string;
+    problemId: string;
+    selectedId: string;
+    ans: string;
 }

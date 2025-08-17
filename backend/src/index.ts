@@ -9,8 +9,19 @@ server.listen(3000, () => {
     console.log("Server is running on port 3000");
 });
 
-const users: User[] = [];
-const submissions: Submission[] = [];
+interface ProblemInterface {
+    id: string;
+    problemSetId: string;
+    problemName: string;
+    optionA: string;
+    optionB: string;
+    optionC: string;
+    optionD: string;
+    ans: string;
+}
+
+let problem: ProblemInterface | undefined = undefined;
+let submissions: Submission[] = [];
 
 
 io.on('connection', (client) => {
@@ -32,14 +43,7 @@ io.on('connection', (client) => {
         }
      });
         
-
     client.on('join-room', (data) => {
-        users.push({
-            socketId: data.id,
-            name: data.name,
-            type: data.type,
-            roomId: data.roomId
-        });
         
         client.join(data.roomId);
 
@@ -55,19 +59,19 @@ io.on('connection', (client) => {
     })
 
     client.on('submission', (data) => {
-        const id = data.id;
+        console.log("data is", data);
+        const socketId = data.socketId;
         const problemId = data.problemId;
-        const selectedId = data.ansId;
-        console.log(data);
+        const selectedId = data.selectedId;
+        const question = data.problem
+        problem = question;
 
         submissions.push({
-            id: id,
+            socketId: socketId,
             problemId: problemId,
-            selectedId: selectedId
-
+            selectedId: selectedId,
+            ans: data.ans
         });
-        console.log(submissions);
-
     });
 
     client.on('admin-problem', (data) => {
@@ -86,6 +90,35 @@ io.on('connection', (client) => {
 
     client.on('show-leaderboad', (data) => {
         // send users to show leaderboad
+        const roomId = data.roomId;
+        const problemId = problem?.id;
+        console.log("Problem id is", problemId)
+        const totalUser = submissions.length;
+        const selectedA = submissions.filter((user:any) => user.selectedId === 'A' ).length;
+        const selectedB = submissions.filter((user:any) => user.selectedId === 'B' ).length;
+        const selectedC = submissions.filter((user:any) => user.selectedId === 'C' ).length;
+        const selectedD = submissions.filter((user:any) => user.selectedId === 'D' ).length; 
+        console.log({
+            selectedA,
+            selectedB,
+            selectedC,
+            selectedD,
+            ans: problem?.ans
+        });
+
+        client.to(roomId).emit('leaderboad', {
+            selectedA,
+            selectedB,
+            selectedC,
+            selectedD,
+            ans: problem?.ans
+        });
+        
+    });
+
+    client.on('disconnect', () => {
+        const socketId = client.id;
+        submissions = submissions.filter(user => user.socketId !=socketId);
     });
 
 });

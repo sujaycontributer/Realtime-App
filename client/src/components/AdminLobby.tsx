@@ -38,7 +38,8 @@ function AdminLobby() {
   const showLeaderBoadHandler = () => { // trigger the emmit of current question's leaderboard
     socket?.emit('show-leaderboad', {
       roomId: roomId,
-      problem: currentProblem
+      problem: currentProblem,
+      
     } )
   }
 
@@ -54,7 +55,7 @@ function AdminLobby() {
           <Quiz question={currentProblem} />
           </section>
   
-        <section className="flex justify-center items-center gap-10 p-2 h-[100px]">
+        <section className="flex justify-center items-center mt-14 md:mt-0 gap-10 p-2 h-[100px]">
           <button 
           onClick={nextQuestionHandler}
           className="bg-gray-800 font-semibold text-gray-200 py-2  md:p-2 rounded-lg shadow-lg  hover:bg-gray-700">

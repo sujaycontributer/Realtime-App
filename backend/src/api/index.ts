@@ -45,7 +45,7 @@ app.get('/problemset', async (req, res) => {
 });
 
 app.post('/problem', async (req, res) => {
-    const {problemSetId, problemName, options} = req.body;
+    const {problemSetId, problemName, options, ansOption} = req.body;
 
     try {
         await prisma?.problem.create({
@@ -56,7 +56,7 @@ app.post('/problem', async (req, res) => {
                 optionB:options[1],          
                 optionC:options[2],          
                 optionD:options[3], 
-                ans: options[4]
+                ans: ansOption
             }
         });
     } catch (error) {

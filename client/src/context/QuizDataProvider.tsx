@@ -8,6 +8,7 @@ interface problemInterface {
       optionB: string;
       optionC: string;
       optionD: string;
+      ans:string;
 }
 
 interface QuizContextInterface {

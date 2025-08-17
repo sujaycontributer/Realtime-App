@@ -8,6 +8,7 @@ export default function ClinetLobby() {
     const {roomId} = useParams();
     const {socket, connectSocket, disconnectSocket} = useContext(SocketContext);
     const [problem, setProblem] = useState<ProblemInterface >();
+    console.log(problem)
 
     useEffect(() => {
         connectSocket();
@@ -22,6 +23,8 @@ export default function ClinetLobby() {
 
 
         return () => {
+          socket?.off('question');
+          socket?.off('show-leaderboad');
           disconnectSocket();
         }
     }, []);
@@ -33,7 +36,7 @@ export default function ClinetLobby() {
     <div  className="min-h-screen w-full flex flex-col justify-center items-center bg-gray-100">
       <h1>Wait for admin to start ...</h1>
       <section className="mt-8">
-        <Quiz question={problem} />
+        <Quiz question={problem} type="user" />
       </section>
     </div>
   )
