@@ -53,6 +53,7 @@ io.on('connection', (client) => {
     });
 
     client.on('question-request', (data) => {
+        submissions = [];
         client.to(data.roomId).emit('question', ({
             problem: data.problem
         }));
@@ -107,6 +108,8 @@ io.on('connection', (client) => {
         });
 
         client.to(roomId).emit('leaderboad', {
+            problem: problem,
+            totalUser: totalUser,
             selectedA,
             selectedB,
             selectedC,

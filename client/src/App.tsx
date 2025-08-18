@@ -7,6 +7,7 @@ import Admin from "./components/Admin";
 import ClinetLobby from "./components/ClinetLobby";
 import CreateProblem from "./components/CreateProblem";
 import CreateSet from "./components/CreateSet";
+import Leaderboad from "./components/Leaderboad";
 
 
 
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/createset" element={<CreateSet/>} />
         <Route path="/set/:setId" element={<CreateProblem />} />
         <Route path="/quiz" element={<Quiz/> } />
+        <Route path="/lead" element={<Leaderboad  />}/>
       </Routes>
       </BrowserRouter>
    </div>

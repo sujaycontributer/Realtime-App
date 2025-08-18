@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import type {ProblemInterface} from '../types'
 import { SocketContext } from '../context/SocketContext';
 
@@ -10,6 +10,11 @@ export default function Quiz({question, type}: {
   const {socket} = useContext(SocketContext);
   const [selectedOption, setSelectedOption] = useState(null);
   const [isSelect, setIsSelect] = useState<boolean>(false);
+
+  useEffect(() => {
+    setSelectedOption(null);
+    setIsSelect(false);
+  }, [question]);
 
   const quizOptions = [  
     {option: question?.optionA, id: "A"},
@@ -52,7 +57,7 @@ export default function Quiz({question, type}: {
 }
 
 
-function QuizOptions({ options, onSelect, selectedOption, isSelect, type }:any) {
+function QuizOptions({ options, onSelect, selectedOption, isSelect , type }:any) {
   
 
   return (
