@@ -65,7 +65,7 @@ const Leaderboard = ({ data }:{data: {
                                     {value.val} <span className="text-sm">user</span>
                                 </div>
                                 <div
-                                    className={`w-2/3 md:w-1/2 ${value.id === data?.ans ? "bg-green-500 z-50": "bg-red-500 opacity-80"} rounded-t-lg transition-all duration-700 ease-out shadow-lg`}
+                                    className={`w-2/3 md:w-1/2 ${value.id === data?.ans ? "bg-green-500 z-50": "bg-red-500 opacity-80"} rounded-t-lg transition-all duration-1000 ease-out shadow-lg`}
                                     style={{ height: `${heightPercentage}%` }}
                                 ></div>
                                 <div className={`text-xs md:text-sm ${value.id === data?.ans ? "text-green-400": "text-gray-400"}  font-semibold mt-2`}>
