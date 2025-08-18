@@ -3,6 +3,7 @@ import { SocketContext } from "../context/SocketContext";
 import type {ProblemInterface} from '../types'
 import Quiz from "./Quiz";
 import Leaderboad from "./Leaderboad";
+import { LoaderFive } from "./ui/loader";
 
 export default function ClinetLobby() {
     const {socket, connectSocket, disconnectSocket} = useContext(SocketContext);
@@ -53,9 +54,9 @@ export default function ClinetLobby() {
 
   return (
     <div  className="min-h-screen w-full flex flex-col justify-center items-center bg-gray-100">
+      <div className={`${!problem ? "block": "hidden"} flex justify-center`}><LoaderFive  text="Wait for admin to start ..."/></div>
       <div className={`${isLeaderboad ? "hidden": "block"}`}>
-        <h1>Wait for admin to start ...</h1>
-        <section className="mt-8">
+        <section className={`${!problem ? "hidden": "block"} mt-8`}>
           <Quiz question={problem} type="user" />
         </section>
       </div>

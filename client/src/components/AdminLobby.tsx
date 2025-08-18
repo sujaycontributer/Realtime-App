@@ -50,7 +50,6 @@ function AdminLobby() {
         </div>
 
         <div className={`${problems.length > 0 ? "block": "hidden"}`}>
-          <h1 className="text-md text-center p-2 ">Wait for admin to start ...</h1>
           <section className="mt-8">
           <Quiz question={currentProblem} />
           </section>

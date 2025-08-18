@@ -25,7 +25,6 @@ export default function App() {
         <Route path="/createset" element={<CreateSet/>} />
         <Route path="/set/:setId" element={<CreateProblem />} />
         <Route path="/quiz" element={<Quiz/> } />
-        <Route path="/lead" element={<Leaderboad  />}/>
       </Routes>
       </BrowserRouter>
    </div>

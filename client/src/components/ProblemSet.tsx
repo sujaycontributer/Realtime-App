@@ -30,6 +30,7 @@ export default function ProblemSet({roomExist}: {roomExist?:boolean}) {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
+  //@ts-ignore
   const { setProblems } = useContext(quizContext) as QuizContextType;
 
   useEffect(() => {
@@ -61,7 +62,7 @@ export default function ProblemSet({roomExist}: {roomExist?:boolean}) {
   };
 
   return (
-    <div className='bg-white max-w-2xl min-h-[400px] p-6 rounded-3xl shadow-lg'>
+    <div className={`bg-white ${!roomExist ? "w-full h-screen ": "max-w-2xl min-h-[400px]"}   p-6 rounded-3xl shadow-lg`}>
       <h1 className='p-2 text-3xl font-bold font-sans text-gray-900 text-center mb-6 tracking-wide'>
         Choose Your Problem Set
       </h1>
