@@ -34,11 +34,11 @@ io.on('connection', (client) => {
         if (room) {
             // The room exists and has at least one socket in it
             const numberOfClients = room.size;
-            console.log(`Room '${roomId}' exist with ${numberOfClients} client(s).`);
+            // console.log(`Room '${roomId}' exist with ${numberOfClients} client(s).`);
             client.emit('room-status', { roomId, exists: true, clients: numberOfClients });
         } else {
             // The room does not exist (no sockets are currently in it)
-            console.log(`Room '${roomId}' does not exist or is empty.`);
+            // console.log(`Room '${roomId}' does not exist or is empty.`);
             client.emit('room-status', { roomId, exists: false, clients: 0 });
         }
      });
@@ -93,7 +93,6 @@ io.on('connection', (client) => {
         // send users to show leaderboad
         const roomId = data.roomId;
         const problemId = problem?.id;
-        console.log("Problem id is", problemId)
         const totalUser = submissions.length;
         const selectedA = submissions.filter((user:any) => user.selectedId === 'A' ).length;
         const selectedB = submissions.filter((user:any) => user.selectedId === 'B' ).length;
