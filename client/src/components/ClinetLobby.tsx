@@ -22,8 +22,6 @@ export default function ClinetLobby() {
         });
         socket?.on('leaderboad', (data) => {
           setIsLeaderboad(true);
-          console.log("data is", data);
-          const problem = data.problem;
           const totalUser = data.totalUser;
           const selectedA = data.selectedA;
           const selectedB = data.selectedB
@@ -61,7 +59,10 @@ export default function ClinetLobby() {
         </section>
       </div>
       <div className={`${isLeaderboad ? "block": "hidden"} mx-auto`}>
+        <section>
         <Leaderboad data={data}/>
+        </section>
+        
       </div>
     </div>
   )

@@ -107,7 +107,7 @@ io.on('connection', (client) => {
             ans: problem?.ans
         });
 
-        client.to(roomId).emit('leaderboad', {
+        io.to(roomId).emit('leaderboad', {
             problem: problem,
             totalUser: totalUser,
             selectedA,
