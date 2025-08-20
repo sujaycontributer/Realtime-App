@@ -7,6 +7,7 @@ import ClinetLobby from "./components/ClinetLobby";
 import CreateProblem from "./components/CreateProblem";
 import CreateSet from "./components/CreateSet";
 import Navbar from "./components/Navbar";
+import { SidebarDemo } from "./components/SidebarMemo";
 
 
 
@@ -23,7 +24,7 @@ export default function App() {
         <Route path="/sets" element={<ProblemSet />} /> 
         <Route path="/createset" element={<CreateSet/>} />
         <Route path="/set/:setId" element={<CreateProblem />} />
-        <Route path="/navbar" element={<Navbar />}/>
+        <Route path="/sidebar" element={<SidebarDemo  />}/>
       </Routes>
       </BrowserRouter>
    </div>

@@ -62,12 +62,12 @@ export default function ProblemSet({roomExist}: {roomExist?:boolean}) {
   };
 
   return (
-    <div className={`bg-white ${!roomExist ? "w-full h-screen ": "max-w-2xl min-h-[400px]"}   p-6 rounded-3xl shadow-lg`}>
-      <h1 className='p-2 text-3xl font-bold font-sans text-gray-900 text-center mb-6 tracking-wide'>
+    <div className={`bg-white  ${!roomExist ? "w-full h-screen fixed top-0 left-0 md:left-[305px]   ": "max-w-2xl min-h-[400px]"}   p-4 rounded-md shadow-lg`}>
+      <h1 className='p-2 text-3xl  font-bold font-sans text-gray-900 text-center mb-6 tracking-wide'>
         Choose Your Problem Set
       </h1>
-      
-      <div className='max-h-[400px] flex flex-col gap-5 mt-4 overflow-y-scroll hide-scrollbar scroll-smooth'>
+
+      <div className='max-h-[500px]  flex flex-col gap-5 mt-4 overflow-y-scroll  hide-scrollbar scroll-smooth'>
         {loading && <p className='text-center text-gray-600'>Loading problem sets...</p>}
         {error && <p className='text-center text-red-500 font-medium'>Error: {error}</p>}
         
@@ -79,7 +79,7 @@ export default function ProblemSet({roomExist}: {roomExist?:boolean}) {
           <button
             key={set.id}
             className='
-              text-gray-800 transition-all duration-300 text-xl font-medium 
+              md:w-full text-gray-800 flex justify-center transition-all duration-300 text-xl font-medium 
               py-6 rounded-2xl shadow-md
               bg-gradient-to-r from-pink-100 to-blue-100
               hover:from-pink-200 hover:to-blue-200 
