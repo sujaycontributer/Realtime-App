@@ -55,7 +55,7 @@ export default function Admin() {
                       <h1 className='text-xl font-semibold text-neutral-800 ml-8'>Create the room  </h1>
                       <input type="text" placeholder='459q3432fsf' className={`mt-4 px-4 py-3 w-[320px] rounded-xl border border-violet-300 focus:outline-none focus:ring-2 focus:ring-violet-500 transition duration-200`} ref={roomIdRef}  onChange={onchangeHandler} />
                  </div>
-                <button className='px-2 h-12 w-30 md:w-40 md:text-xl text-sm rounded-2xl cursor-pointer border-2 mx-auto border-violet-400' onClick={JoinHandler}>
+                <button className='px-2 h-12 w-30 md:w-40  rounded-2xl cursor-pointer border-2 mx-auto border-violet-400' onClick={JoinHandler}>
                     Create room
                 </button>
         </div>

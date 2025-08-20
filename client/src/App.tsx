@@ -2,11 +2,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Lobby from "./components/Lobby";
 import ProblemSet from "./components/ProblemSet";
 import AdminLobby from "./components/AdminLobby";
-import Quiz from "./components/Quiz";
 import Admin from "./components/Admin";
 import ClinetLobby from "./components/ClinetLobby";
 import CreateProblem from "./components/CreateProblem";
 import CreateSet from "./components/CreateSet";
+import Navbar from "./components/Navbar";
 
 
 
@@ -23,7 +23,7 @@ export default function App() {
         <Route path="/sets" element={<ProblemSet />} /> 
         <Route path="/createset" element={<CreateSet/>} />
         <Route path="/set/:setId" element={<CreateProblem />} />
-        <Route path="/quiz" element={<Quiz/> } />
+        <Route path="/navbar" element={<Navbar />}/>
       </Routes>
       </BrowserRouter>
    </div>
