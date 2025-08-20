@@ -86,19 +86,19 @@ function AdminLobby() {
         <section className={`fixed bottom-14 md:bottom-10 left-1/2 -translate-x-1/2 flex justify-center bg-gray-100 items-center ${isLeaderboad? 'mt-3': 'mt-3'} gap-4 md:gap-10 p-2 md:h-[100px] w-full`}>
           <button 
           onClick={nextQuestionHandler}
-          className="bg-gray-800 font-semibold text-gray-200 py-2  md:p-2  rounded-lg shadow-lg  hover:bg-gray-700">
+          className="bg-gray-800 font-semibold text-gray-200 py-2 px-1  md:p-2  rounded-lg shadow-lg  hover:bg-gray-700">
             Next question
           </button>
             
           <button
           onClick={showQuestionHandler} 
-          className="bg-gray-800 font-semibold text-gray-200 shadow-lg py-2 md:p-2 rounded-lg hover:bg-gray-700">
+          className="bg-gray-800 font-semibold text-gray-200 shadow-lg py-2 px-1 md:p-2 rounded-lg hover:bg-gray-700">
             Show question
           </button>
             
           <button 
           onClick={showLeaderBoadHandler}
-          className="bg-green-700 font-semibold text-gray-200 shadow-lg py-2  md:p-2 rounded-lg hover:bg-gray-700">
+          className="bg-green-700 font-semibold text-gray-200 shadow-lg py-2 px-1  md:p-2 rounded-lg hover:bg-gray-700">
             Show leaderboad
           </button>
         </section>

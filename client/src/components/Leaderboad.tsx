@@ -46,9 +46,9 @@ const Leaderboard = ({ data }:{data: {
 
     return (
         <div className="flex flex-col items-center justify-center w-full p-4 mb-10  bg-gray-100 font-inter text-white">
-            <div className="bg-gray-800 p-8 rounded-3xl shadow-md mx-auto w-full md:max-2xl text-center border border-gray-700">
+            <div className="bg-gray-800 p-8 px-14 rounded-3xl  shadow-md mx-auto w-full md:max-2xl text-center border border-gray-700">
                 <h1 className="text-3xl font-extrabold text-blue-400 mb-6 tracking-wide">
-                    Leaderboard
+                    Leaderboard 🤡
                 </h1>
 
                 <div className="flex flex-row justify-between items-end md:w-[400px] gap-4 h-64 mb-6 md:h-80">
