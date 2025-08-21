@@ -1,6 +1,7 @@
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import axios from 'axios'
 import { useParams } from 'react-router-dom';
+import { BACKEND_URL } from '@/lib/utils';
 
 // Define the type for our form data
 type FormData = {
@@ -19,7 +20,7 @@ const CreateProblem = () => {
   // Handle form submission
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     console.log('Form data submitted:', data);
-    await axios.post('http://localhost:3000/problem', {
+    await axios.post(`${BACKEND_URL}/problem`, {
       problemSetId: setId,
       problemName: data.problemName,
       options: [data.optionA, data.optionB, data.optionC, data.optionD],
