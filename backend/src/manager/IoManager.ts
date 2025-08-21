@@ -13,8 +13,9 @@ export class IoManager {
             
             const io = new Server(server, {
                 cors: {
-                    origin: '*',
-                    methods: ["GET", "POST"]
+                    origin: 'https://xyzquiz.netlify.app/',
+                    methods: ["GET", "POST"],
+                    credentials: true
                 }
             });
             return this.io = io;

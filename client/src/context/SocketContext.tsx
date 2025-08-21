@@ -1,6 +1,7 @@
 // src/contexts/SocketContext.js
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import io, { Socket } from 'socket.io-client';
+import { BACKEND_URL } from '@/lib/utils';
 
 interface SocketContextInterface {
     socket: Socket | null;
@@ -26,7 +27,7 @@ export default function SocketProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     // This creates the socket instance only once when the component mounts
-    const newSocket = io('http://localhost:3000', {
+    const newSocket = io(`${BACKEND_URL}`, {
       autoConnect: false, 
     });
 
