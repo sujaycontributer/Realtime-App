@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "./ui/sidebar";
+import { FaRestroom } from "react-icons/fa";
 import {
   IconArrowLeft,
   IconBrandTabler,
@@ -12,11 +13,18 @@ import { cn } from "@/lib/utils";
 export function SidebarDemo() {
   const links = [
     {
-      label: "Room",
+      label: "Join Room",
       href: "join",
       icon: (
-        <IconBrandTabler className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+        <FaRestroom className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
+    },
+    {
+      label: "Create Room",
+      href: "/admin",
+      icon:  (
+        <IconBrandTabler className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+      )
     },
     {
       label: "Sets",
@@ -112,12 +120,12 @@ export const LogoIcon = () => {
 };
 
 // Dummy dashboard component with content
-const Dashboard = () => {
-  return (
-    <div className="flex flex-1">
-      <div className="flex h-full w-full flex-1 flex-col gap-2 rounded-tl-2xl border border-neutral-200 bg-red-200 p-2 md:p-10 dark:border-neutral-700 dark:bg-neutral-900">
+// const Dashboard = () => {
+//   return (
+//     <div className="flex flex-1">
+//       <div className="flex h-full w-full flex-1 flex-col gap-2 rounded-tl-2xl border border-neutral-200 bg-red-200 p-2 md:p-10 dark:border-neutral-700 dark:bg-neutral-900">
           
-      </div>
-    </div>
-  );
-};
+//       </div>
+//     </div>
+//   );
+// };

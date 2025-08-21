@@ -33,7 +33,7 @@ export default function Lobby() {
 
 
   return (
-    <div className='md:fixed md:top-1 md:left-[305px]  w-full h-screen  flex justify-center items-center bg-gray-200 p-4 text-black font-mono'>
+    <div className='fixed top-0 left-0 md:left-[305px] w-full h-screen  flex justify-center items-center bg-gray-200 p-4 text-black font-mono'>
       <div className='md:mr-[300px] flex flex-col items-center justify-center gap-4 p-4 w-[50%]'>
         <div>
           <h1 className='text-xl font-semibold text-neutral-800 ml-8'>Enter the code to join</h1>

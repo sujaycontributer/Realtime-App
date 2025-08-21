@@ -30,8 +30,8 @@ const CreateProblem = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4 font-sans">
-      <div className="bg-white p-8 rounded-2xl w-full max-w-lg border border-gray-200">
+    <div className="h-screen fixed top-0 left-0 md:left-[305px] w-full bg-gray-100 flex items-center justify-center p-4 font-sans">
+      <div className="bg-white p-8 md:-translate-x-1/2 rounded-2xl w-full max-w-lg border border-gray-200">
         <h1 className="text-3xl font-extrabold text-gray-800 text-center mb-6">Create Problem</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
 
