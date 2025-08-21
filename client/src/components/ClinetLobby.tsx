@@ -51,8 +51,8 @@ export default function ClinetLobby() {
 
 
   return (
-    <div  className="min-h-screen w-full flex flex-col justify-center items-center bg-gray-100">
-      <div className={`${!problem ? "block": "hidden"} flex justify-center`}><LoaderFive  text="Wait for admin to start ..."/></div>
+    <div  className="min-h-screen fixed top-0 left-0 md:left-[305px] w-full flex flex-col justify-center items-center bg-gray-100">
+      <div className={`${!problem ? "block": "hidden"} md:mr-[400px] flex justify-center`}><LoaderFive  text="Wait for admin to start ..."/></div>
       <div className={`${isLeaderboad ? "hidden": "block"}`}>
         <section className={`${!problem ? "hidden": "block"} mt-8`}>
           <Quiz question={problem} type="user" />

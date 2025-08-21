@@ -42,7 +42,7 @@ export default function Quiz({question, type}: {
 
   return (
     <div className="bg-gray-100 p-4 min-h-[200px] flex items-center justify-center">
-      <div className="bg-white p-6 rounded-lg shadow-xl w-full md:min-w-2xl mx-auto">
+      <div className="bg-white p-6 rounded-lg shadow-xl w-full md:min-w-2xl md:mr-[600px] mx-auto">
         <h2 className="text-xl font-bold text-center text-gray-800 mb-6">{question?.problemName}</h2>
         <QuizOptions 
           options={quizOptions} 

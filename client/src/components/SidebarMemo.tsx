@@ -14,7 +14,7 @@ export function SidebarDemo() {
   const links = [
     {
       label: "Join Room",
-      href: "join",
+      href: "/join",
       icon: (
         <FaRestroom className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
@@ -103,7 +103,7 @@ export const Logo = () => {
         animate={{ opacity: 1 }}
         className="font-medium whitespace-pre text-black dark:text-white"
       >
-        Acet Labs
+        QuizPulse
       </motion.span>
     </a>
   );

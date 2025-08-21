@@ -68,8 +68,8 @@ function AdminLobby() {
   }
 
   return (
-    <div className={` bg-gray-100 h-screen md:w-full flex flex-col justify-center items-center `}>
-        <div className={`${problems.length === 0 ? "block": "hidden"}`}>
+    <div className={`fixed top-0 left-0 md:left-[305px] bg-gray-100 h-screen md:w-full flex flex-col justify-center items-center `}>
+        <div className={`${problems.length === 0 ? "block md:mr-[300px]": "hidden"}`}>
           <ProblemSet roomExist={true}/>
         </div>
 

@@ -62,7 +62,7 @@ export default function ProblemSet({roomExist}: {roomExist?:boolean}) {
   };
 
   return (
-    <div className={`bg-white w-full  ${!roomExist ? "md:w-[80%] h-screen fixed top-0 left-0 md:left-[305px]": "max-w-2xl min-h-[400px]"} p-4 px-8 rounded-md shadow-lg`}>
+    <div className={`bg-white w-full  ${!roomExist ? "md:w-[80%] h-screen fixed top-0 left-0 md:left-[305px]": "md:w-[80%] h-screen fixed top-0 left-0 md:left-[305px]"} p-4 px-8 rounded-md shadow-lg`}>
       <h1 className='p-2 text-3xl font-bold font-sans text-gray-900 text-center mb-6 tracking-wide'>
         Choose Your Problem Set
       </h1>
