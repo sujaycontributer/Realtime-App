@@ -41,8 +41,8 @@ export default function Quiz({question, type}: {
   };
 
   return (
-    <div className="bg-gray-100 p-4 min-h-[200px] flex items-center justify-center">
-      <div className="bg-white p-6 rounded-lg shadow-xl w-full md:min-w-2xl md:mr-[600px] mx-auto">
+    <div className="bg-gray-100 w-full ml-0.5 md:ml-0 p-4 min-h-[200px] flex items-center justify-center">
+      <div className="bg-white p-6 rounded-lg shadow-xl w-full md:min-w-2xl md:mr-[400px] lg:mr-[600px] mx-auto">
         <h2 className="text-xl font-bold text-center text-gray-800 mb-6">{question?.problemName}</h2>
         <QuizOptions 
           options={quizOptions} 
@@ -68,12 +68,12 @@ function QuizOptions({ options, onSelect, selectedOption, isSelect , type }:any)
           onClick={() => onSelect(optionObj.id)}
           disabled={type === "user" ? isSelect : false}
           className={`
-            w-full py-5 md:py-16 px-10 md:px-6 text-left border-2 rounded-lg transition-all duration-300 text-lg
+            w-full py-5 md:py-16 px-10 md:px-6 text-left md:text-center text-sm  border-2 rounded-lg transition-all duration-300 md:text-lg
             ${selectedOption === optionObj.id 
               ? 'bg-blue-600 border-blue-600 text-white font-semibold shadow-md' 
               : 'bg-gray-50 border-gray-300 text-gray-800 hover:bg-gray-100 hover:border-gray-400'
             }
-            ${type === "user" ? "px-16": ""}
+            ${type === "user" ? "": ""}
           `}
         >
           {optionObj.option}
