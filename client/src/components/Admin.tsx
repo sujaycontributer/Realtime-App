@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Admin() {
   const {socket, connectSocket} = useContext(SocketContext);
-  const [roomId, setRoomId] = useState<string>("");
   const [message, setMessage] = useState("");
 
   // Use a ref to hold the latest roomId value
@@ -36,7 +35,7 @@ export default function Admin() {
   const JoinHandler = () => {
     connectSocket();
     console.log('Join click');
-    socket?.emit('checkRoomExistence', roomId);
+    socket?.emit('checkRoomExistence', roomIdRef.current?.value);
   };
 
   socket?.on('message', (newMessage) => {

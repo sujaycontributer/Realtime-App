@@ -6,7 +6,6 @@ import Admin from "./components/Admin";
 import ClinetLobby from "./components/ClinetLobby";
 import CreateProblem from "./components/CreateProblem";
 import CreateSet from "./components/CreateSet";
-import Navbar from "./components/Navbar";
 import { SidebarDemo } from "./components/SidebarMemo";
 
 
