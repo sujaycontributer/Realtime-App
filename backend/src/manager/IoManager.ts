@@ -7,7 +7,7 @@ export const app = express();
 export const server = http.createServer(app);
 
 app.use(cors({
-  origin: ["https://xyzquiz.netlify.app"],
+  origin: ["https://xyzquiz.netlify.app", "http://localhost:5173"],
   methods: ["GET", "POST"],
   credentials: true
 }));
@@ -20,7 +20,7 @@ export class IoManager {
             
             const io = new Server(server, {
                 cors: {
-                    origin: 'https://xyzquiz.netlify.app',
+                    origin: ['https://xyzquiz.netlify.app', "http://localhost:5173"],
                     methods: ["GET", "POST"],
                     credentials: true
                 }
