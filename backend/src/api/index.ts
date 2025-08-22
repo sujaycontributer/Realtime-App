@@ -64,7 +64,7 @@ app.get(
   passport.authenticate("google", { failureRedirect: "/login" }),
   (req, res) => {
     // Successful login -> create session
-    res.redirect("/");
+    res.redirect(`https://xyzquiz.netlify.app`);
   }
 );
 
