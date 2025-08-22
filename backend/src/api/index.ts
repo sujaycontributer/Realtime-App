@@ -95,7 +95,7 @@ app.get('/auth/status', (req, res) => {
 app.post('/problemset', async (req, res) => {
     let email = undefined;
     //@ts-ignore
-    if(req.isAuthenticated && req.isAuthenticated()) email = req.user.emails ? profile.emails[0].value : undefined;
+    if(req.isAuthenticated && req.isAuthenticated()) email = req.user.email;
     const {setName} = req.body;
 
     const problemSet = await prisma?.problemset.create({
