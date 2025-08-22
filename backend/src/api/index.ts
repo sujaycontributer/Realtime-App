@@ -6,7 +6,6 @@ import session from "express-session";
 import passport from "passport";
 import { strategy } from '../service/auth';
 import { VerifyCallback,  Profile } from 'passport-google-oauth20';
-import { User } from '@prisma/client';
 
 
 app.use(cors({
