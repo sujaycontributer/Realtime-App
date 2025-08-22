@@ -7,6 +7,8 @@ import passport from "passport";
 import { strategy } from '../service/auth';
 import { VerifyCallback,  Profile } from 'passport-google-oauth20';
 
+const BACKEND_URL = "https://realtime-app-backend.onrender.com"
+
 
 app.use(cors({
     origin: ["https://xyzquiz.netlify.app", "http://localhost:5173"],
@@ -62,7 +64,7 @@ app.get(
   passport.authenticate("google", { failureRedirect: "/login" }),
   (req, res) => {
     // Successful login -> create session
-    res.redirect("http://localhost:5173");
+    res.redirect("/");
   }
 );
 
@@ -111,10 +113,10 @@ app.post('/problemset', async (req, res) => {
 
 app.get('/problemset', async (req, res) => {
     let email = undefined;
-    //@ts-ignore
-    if(req.isAuthenticated && req.isAuthenticated()) email = req.user.email;
-
-    try {
+    if(req.isAuthenticated && req.isAuthenticated()){
+            //@ts-ignore
+         email = req.user.email;
+        try {
         const allProblem = await prisma?.problemset.findMany({
             where:{
                 emailId: email
@@ -127,8 +129,11 @@ app.get('/problemset', async (req, res) => {
             problemSet: allProblem 
         });
 
-    } catch (err) {
+        } catch (err) {
         return res.status(500).json("Error while finding problem set" + (err as any).message);
+        }
+    }else{
+        res.redirect(`${BACKEND_URL}/auth/google`);
     }
 
 });
