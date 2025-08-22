@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { quizContext } from '../context/QuizDataProvider';
 import { useNavigate } from 'react-router-dom';
 import { BACKEND_URL } from '@/lib/utils';
+import api from '@/api/axios';
 
 interface Problem {
   id: string;
@@ -38,7 +39,7 @@ export default function ProblemSet({ roomExist }: { roomExist?: boolean }) {
     const getProblemSets = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`${BACKEND_URL}/problemset`);
+        const response = await api.get(`${BACKEND_URL}/problemset`);
         if (response.data && response.data.problemSet) {
           setProblemSets(response.data.problemSet);
         } else {

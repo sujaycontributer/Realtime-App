@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BACKEND_URL } from '@/lib/utils';
+import api from '@/api/axios';
 
 const CreateSet = () => {
   return (
@@ -27,7 +28,7 @@ const Create = () => {
   };
 
   const handleCreateClick = async () => {
-    const res = await axios.post(`${BACKEND_URL}/problemset`, {
+    const res = await api.post(`${BACKEND_URL}/problemset`, {
         "setName": inputValue
     });
     console.log(res.data);
