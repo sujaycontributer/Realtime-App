@@ -133,7 +133,7 @@ app.get('/problemset', async (req, res) => {
         return res.status(500).json("Error while finding problem set" + (err as any).message);
         }
     }else{
-        res.redirect(`${BACKEND_URL}/auth/google`);
+        res.status(401).json({message: "Unauthorized"});
     }
 
 });
