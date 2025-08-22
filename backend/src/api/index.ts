@@ -29,7 +29,7 @@ app.use(passport.session());
 
 passport.use(strategy);
 
-passport.serializeUser((user:any , done:VerifyCallback) => {
+passport.serializeUser((user, done:VerifyCallback) => {
     //@ts-ignore
     const email = user.emails[0]?user.emails[0].value: undefined;
 
