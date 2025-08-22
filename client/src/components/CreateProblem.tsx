@@ -1,5 +1,4 @@
 import { useForm, type SubmitHandler } from 'react-hook-form';
-import axios from 'axios'
 import { useParams } from 'react-router-dom';
 import { BACKEND_URL } from '@/lib/utils';
 import api from '@/api/axios';
