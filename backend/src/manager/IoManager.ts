@@ -3,6 +3,7 @@ import { Server } from 'socket.io';
 import express from 'express'
 import cors from 'cors'
 
+
 export const app = express();
 export const server = http.createServer(app);
 
@@ -11,6 +12,7 @@ app.use(cors({
   methods: ["GET", "POST"],
   credentials: true
 }));
+
 
 export class IoManager {
     private static io: Server;  
