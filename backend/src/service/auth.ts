@@ -1,4 +1,4 @@
-import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import { Strategy as GoogleStrategy,Profile, VerifyCallback } from "passport-google-oauth20";
 import prisma from "../lib/prisma";
 import dotenv from 'dotenv';
 
@@ -12,7 +12,7 @@ export const strategy = new GoogleStrategy(
     clientSecret: process.env.CLIENT_SECRET as string,
     callbackURL: "http://localhost:3000/auth/google/callback",
   },
-  async (accessToken, refreshToken, profile, done) => {
+  async (accessToken:string, refreshToken:string, profile:Profile, done:VerifyCallback) => {
     // Here you get the Google profile info
     // Normally you would find or create a user in your DB
     const userEmail = profile.emails ? profile.emails[0].value : undefined;

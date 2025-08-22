@@ -5,6 +5,8 @@ import prisma from "../lib/prisma";
 import session from "express-session";
 import passport from "passport";
 import { strategy } from '../service/auth';
+import { VerifyCallback,  Profile } from 'passport-google-oauth20';
+import { User } from '@prisma/client';
 
 
 app.use(cors({
@@ -16,7 +18,7 @@ app.use(express.json());
 
 app.use(
   session({
-    secret: "mySecretKey",
+    secret: process.env.SESSION_SECRET_KEY as string,
     resave: false,
     saveUninitialized: false,
   })
@@ -27,7 +29,7 @@ app.use(passport.session());
 
 passport.use(strategy);
 
-passport.serializeUser((user, done) => {
+passport.serializeUser((user:any , done:VerifyCallback) => {
     //@ts-ignore
     const email = user.emails[0]?user.emails[0].value: undefined;
 
@@ -35,7 +37,7 @@ passport.serializeUser((user, done) => {
 });
 
 // Deserialize user from session
-passport.deserializeUser(async (userEmail, done) => {
+passport.deserializeUser(async (userEmail:string, done:VerifyCallback) => {
 
     try{
         const user = await prisma?.user.findUnique({
@@ -43,6 +45,7 @@ passport.deserializeUser(async (userEmail, done) => {
                 email: userEmail as string
             }
         });
+        if(user)
         done(null, user);
         
     }catch (err) {
