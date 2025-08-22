@@ -10,7 +10,7 @@ export const strategy = new GoogleStrategy(
   {
     clientID: process.env.CLIENT_ID as string,
     clientSecret: process.env.CLIENT_SECRET as string,
-    callbackURL: "http://localhost:3000/auth/google/callback",
+    callbackURL: "https://realtime-app-backend.onrender.com/auth/google/callback",
   },
   async (accessToken:string, refreshToken:string, profile:Profile, done:VerifyCallback) => {
     // Here you get the Google profile info
