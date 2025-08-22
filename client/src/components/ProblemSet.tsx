@@ -25,7 +25,7 @@ interface QuizContextType {
   setProblems: (problems: Problem[]) => void;
 }
 
-export default function ProblemSet({roomExist}: {roomExist?:boolean}) {
+export default function ProblemSet({ roomExist }: { roomExist?: boolean }) {
   const [problemSets, setProblemSets] = useState<SetInterface[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -42,32 +42,40 @@ export default function ProblemSet({roomExist}: {roomExist?:boolean}) {
         if (response.data && response.data.problemSet) {
           setProblemSets(response.data.problemSet);
         } else {
-          if(response.status === 401){
-            window.location.href = `${BACKEND_URL}/auth/google`;
-            return;
-          } else
           setError('Invalid data format from API.');
         }
       } catch (err) {
-        setError('Failed to fetch problem sets. Please try again later.');
-        console.error(err);
+        if (axios.isAxiosError(err) && err.response) {
+          if (err.response.status === 401) {
+            // User is not authenticated, redirect to the Google login page
+            console.log('User not authenticated. Redirecting to login.');
+            window.location.href = `${BACKEND_URL}/auth/google`;
+            return;
+          } else {
+            // Handle other HTTP errors
+            setError('Failed to fetch problem sets. Please try again later.');
+          }
+        }else {
+          setError('An unexpected error');
+        }
+        
       } finally {
         setLoading(false);
       }
     };
-    
+
     getProblemSets();
   }, []);
 
   const handleSelectSet = (problems: Problem[], id: string) => {
-    if(roomExist) setProblems(problems);
+    if (roomExist) setProblems(problems);
     else {
       navigate(`/set/${id}`);
     }
   };
 
   return (
-    <div className={`bg-white w-full  ${!roomExist ? "md:w-[80%] h-screen fixed top-0 left-0 md:left-[305px]": "md:w-[80%] h-screen fixed top-0 left-0 md:left-[305px]"} p-4 px-8 rounded-md shadow-lg`}>
+    <div className={`bg-white w-full  ${!roomExist ? "md:w-[80%] h-screen fixed top-0 left-0 md:left-[305px]" : "md:w-[80%] h-screen fixed top-0 left-0 md:left-[305px]"} p-4 px-8 rounded-md shadow-lg`}>
       <h1 className='p-2 text-3xl font-bold font-sans text-gray-900 text-center mb-6 tracking-wide'>
         Choose Your Problem Set
       </h1>
@@ -75,11 +83,11 @@ export default function ProblemSet({roomExist}: {roomExist?:boolean}) {
       <div className='max-h-[500px] mx-auto flex flex-col  gap-5 mt-4 overflow-y-scroll  hide-scrollbar scroll-smooth'>
         {loading && <p className='text-center text-gray-600'>Loading problem sets...</p>}
         {error && <p className='text-center text-red-500 font-medium'>Error: {error}</p>}
-        
+
         {!loading && !error && problemSets.length === 0 && (
           <p className='text-center text-gray-600'>No problem sets available.</p>
         )}
-        
+
         {!loading && problemSets.length > 0 && problemSets.map((set) => (
           <button
             key={set.id}
