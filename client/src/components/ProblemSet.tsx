@@ -42,6 +42,10 @@ export default function ProblemSet({roomExist}: {roomExist?:boolean}) {
         if (response.data && response.data.problemSet) {
           setProblemSets(response.data.problemSet);
         } else {
+          if(response.status === 401){
+            window.location.href = `${BACKEND_URL}/auth/google`;
+            return;
+          } else
           setError('Invalid data format from API.');
         }
       } catch (err) {
