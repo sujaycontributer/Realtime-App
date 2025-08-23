@@ -5,5 +5,5 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export const BACKEND_URL = "https://realtime-app-backend.onrender.com"
+export const BACKEND_URL = "https://realtime-app-v5sv.onrender.com"
 

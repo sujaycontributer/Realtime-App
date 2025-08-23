@@ -9,7 +9,6 @@ import { VerifyCallback, Profile } from 'passport-google-oauth20';
 import pg from 'pg';
 import connectPgSimple from 'connect-pg-simple';
 
-const BACKEND_URL = "https://realtime-app-backend.onrender.com"
 
 const pgSession = connectPgSimple(session);
 
