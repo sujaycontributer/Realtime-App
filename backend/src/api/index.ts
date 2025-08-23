@@ -5,7 +5,7 @@ import prisma from "../lib/prisma";
 import session from "express-session";
 import passport from "passport";
 import { strategy } from '../service/auth';
-import { VerifyCallback,  Profile } from 'passport-google-oauth20';
+import { VerifyCallback, Profile } from 'passport-google-oauth20';
 
 const BACKEND_URL = "https://realtime-app-backend.onrender.com"
 
@@ -18,11 +18,11 @@ app.use(cors({
 app.use(express.json());
 
 app.use(
-  session({
-    secret: process.env.SESSION_SECRET_KEY as string,
-    resave: false,
-    saveUninitialized: false,
-  })
+    session({
+        secret: process.env.SESSION_SECRET_KEY as string,
+        resave: false,
+        saveUninitialized: false,
+    })
 );
 
 app.use(passport.initialize());
@@ -30,42 +30,42 @@ app.use(passport.session());
 
 passport.use(strategy);
 
-passport.serializeUser((user, done:VerifyCallback) => {
+passport.serializeUser((user, done: VerifyCallback) => {
     //@ts-ignore
-    const email = user.emails[0]?user.emails[0].value: undefined;
+    const email = user.emails[0] ? user.emails[0].value : undefined;
 
     done(null, email);
 });
 
 // Deserialize user from session
-passport.deserializeUser(async (userEmail:string, done:VerifyCallback) => {
+passport.deserializeUser(async (userEmail: string, done: VerifyCallback) => {
 
-    try{
+    try {
         const user = await prisma?.user.findUnique({
-            where:{
+            where: {
                 email: userEmail as string
             }
         });
-        if(user)
-        done(null, user);
-        
-    }catch (err) {
+        if (user)
+            done(null, user);
+
+    } catch (err) {
         done(err);
     }
 });
 
 app.get("/auth/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
+    passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
 // Google redirects back here
 app.get(
-  "/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/login" }),
-  (req, res) => {
-    // Successful login -> create session
-    res.redirect(`https://xyzquiz.netlify.app`);
-  }
+    "/auth/google/callback",
+    passport.authenticate("google", { failureRedirect: "/login" }),
+    (req, res) => {
+        // Successful login -> create session
+        res.redirect(`https://xyzquiz.netlify.app`);
+    }
 );
 
 
@@ -75,7 +75,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/auth/status', (req, res) => {
-    
+
     // //@ts-ignore
     // const email = req.user.email;
     // //@ts-ignore
@@ -83,57 +83,69 @@ app.get('/auth/status', (req, res) => {
     // if(req.isAuthenticated()) console.log(req.user);
 
 
-  if (req.isAuthenticated()) {
-    // User is authenticated, send a success status and user data
-    res.status(200).json({ isAuthenticated: true, user: req.user });
-  } else {
-    // User is not authenticated, send a failure status
-    res.status(200).json({ isAuthenticated: false });
-  }
+    if (req.isAuthenticated()) {
+        // User is authenticated, send a success status and user data
+        res.status(200).json({ isAuthenticated: true, user: req.user });
+    } else {
+        // User is not authenticated, send a failure status
+        res.status(200).json({ isAuthenticated: false });
+    }
 });
 
 app.post('/problemset', async (req, res) => {
+    const { setName } = req.body;
     let email = undefined;
-    //@ts-ignore
-    if(req.isAuthenticated && req.isAuthenticated()) email = req.user.email;
-    const {setName} = req.body;
+    if (req.isAuthenticated && req.isAuthenticated()) {
+        //@ts-ignore
+        email = req.user.email;
 
-    const problemSet = await prisma?.problemset.create({
-            data: {
-                setName: setName,
-                emailId: email
+        try {
+            const problemSet = await prisma?.problemset.create({
+                data: {
+                    setName: setName,
+                    emailId: email
+                }
+            });
+            return res.status(200).json({
+                status: 200,
+                message: "Problem set is created!",
+                problemSet
             }
-    });
-    return res.status(200).json({
-        status:200,
-        message: "Problem set is created!" ,
-        problemSet});    
+            );
+        } catch {
+            res.status(401).json({ message: "Something error while creating problem set" });
+        }
+    } else {
+        res.status(401).json({ message: "Unauthorized", statusCode: 401 });
+    }
+
+
 
 });
 
 app.get('/problemset', async (req, res) => {
     let email = undefined;
-    if(req.isAuthenticated && req.isAuthenticated()){
-            //@ts-ignore
-         email = req.user.email;
+    if (req.isAuthenticated && req.isAuthenticated()) {
+        //@ts-ignore
+        email = req.user.email;
         try {
-        const allProblem = await prisma?.problemset.findMany({
-            where:{
-                emailId: email
-            },
-            include: {
-                problems: true
-            }
-        });
-        return res.status(200).json({
-            problemSet: allProblem 
-        });
+            const allProblem = await prisma?.problemset.findMany({
+                where: {
+                    emailId: email
+                },
+                include: {
+                    problems: true
+                }
+            });
+            return res.status(200).json({
+                problemSet: allProblem
+            });
 
         } catch (err) {
-        return res.status(500).json("Error while finding problem set" + (err as any).message);
+            return res.status(500).json("Error while finding problem set" + (err as any).message);
         }
-    }else{
-        res.status(401).json({message: "Unauthorized"});
+    } else {
+        res.status(401).json({ message: "Unauthorized" });
     }
 
 });
@@ -141,20 +153,20 @@ app.get('/problemset', async (req, res) => {
 app.post('/problem', async (req, res) => {
     let email = undefined;
     //@ts-ignore
-    if(req.isAuthenticated && req.isAuthenticated()) email = req.user.email;
-    else res.status(401).json({message: "Not Authorized"});
+    if (req.isAuthenticated && req.isAuthenticated()) email = req.user.email;
+    else res.status(401).json({ message: "Not Authorized" });
 
-    const {problemSetId, problemName, options, ansOption} = req.body;
+    const { problemSetId, problemName, options, ansOption } = req.body;
 
     try {
         await prisma?.problem.create({
             data: {
                 problemSetId,
-                problemName,        
-                optionA:options[0],          
-                optionB:options[1],          
-                optionC:options[2],          
-                optionD:options[3], 
+                problemName,
+                optionA: options[0],
+                optionB: options[1],
+                optionC: options[2],
+                optionD: options[3],
                 ans: ansOption
             }
         });
@@ -171,9 +183,9 @@ app.post('/problem', async (req, res) => {
 app.get('/problem', async (req, res) => {
     let email = undefined;
     //@ts-ignore
-    if(req.isAuthenticated && req.isAuthenticated()) email = req.user.email;
-    const {setName} = req.body;
-    const {problemSetId} = req.body;
+    if (req.isAuthenticated && req.isAuthenticated()) email = req.user.email;
+    const { setName } = req.body;
+    const { problemSetId } = req.body;
 
     try {
         const problems = await prisma?.problemset.findMany({
@@ -181,12 +193,12 @@ app.get('/problem', async (req, res) => {
                 emailId: email,
                 setName: setName
             },
-            include:{
+            include: {
                 problems: true
             }
         });
         res.status(200).json({
-            problems: problems,    
+            problems: problems,
             message: "Problem created!"
         });
 
