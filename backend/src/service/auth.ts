@@ -3,7 +3,6 @@ import prisma from "../lib/prisma";
 import dotenv from 'dotenv';
 
 dotenv.config();
-console.log(process.env.CLIENT_ID)
 
 export const strategy = new GoogleStrategy(
   {

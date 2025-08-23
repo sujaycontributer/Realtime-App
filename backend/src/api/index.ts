@@ -6,9 +6,17 @@ import session from "express-session";
 import passport from "passport";
 import { strategy } from '../service/auth';
 import { VerifyCallback, Profile } from 'passport-google-oauth20';
+import pg from 'pg';
+import connectPgSimple from 'connect-pg-simple';
 
 const BACKEND_URL = "https://realtime-app-backend.onrender.com"
 
+const pgSession = connectPgSimple(session);
+
+
+const pgPool = new pg.Pool({
+    connectionString: process.env.DATABASE_URL,
+});
 
 app.use(cors({
     origin: ["https://xyzquiz.netlify.app", "http://localhost:5173"],
@@ -19,6 +27,11 @@ app.use(express.json());
 
 app.use(
     session({
+        //@ts-ignore
+        store: new pgSession({
+            pool: pgPool,
+            tableName: 'session', // The table we created in step 1
+        }),
         secret: process.env.SESSION_SECRET_KEY as string,
         resave: false,
         saveUninitialized: false,
