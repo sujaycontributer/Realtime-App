@@ -169,7 +169,7 @@
   dependencies:
     "@types/express" "*"
 
-"@types/pg@*":
+"@types/pg@*", "@types/pg@^8.15.5":
   version "8.15.5"
   resolved "https://registry.npmjs.org/@types/pg/-/pg-8.15.5.tgz"
   integrity sha512-LF7lF6zWEKxuT3/OR8wAZGzkg4ENGXFNyiV/JeOt9z5B+0ZVwbql9McqX5c/WStFq1GaGso7H1AzP/qSzmlCKQ==
