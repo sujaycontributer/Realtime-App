@@ -26,25 +26,20 @@ app.use(cors({
 app.use(express.json());
 
 app.use(
-    session({
-        //@ts-ignore
-        store: new pgSession({
-            pool: pgPool,
-            tableName: 'session', // The table we created in step 1
-        }),
-        secret: process.env.SESSION_SECRET_KEY as string,
-        resave: false,
-        saveUninitialized: false,
-        cookie: {
-            // `secure` must be true in production (HTTPS)
-            secure: process.env.NODE_ENV === 'production', 
-            // `sameSite` is crucial for cross-origin requests
-            httpOnly: true,
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', 
-            maxAge: 1000 * 60 * 60 * 24 
-        }
-    })
+  session({
+    store: new pgSession({ pool: pgPool, tableName: "session" }),
+    secret: process.env.SESSION_SECRET_KEY as string,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", // ✅ required on Render
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      maxAge: 1000 * 60 * 60 * 24,
+    },
+  })
 );
+
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -81,15 +76,17 @@ app.get("/auth/google",
 
 // Google redirects back here
 app.get(
-    "/auth/google/callback",
-    passport.authenticate("google", { failureRedirect: "/login" }),
-    (req, res) => {
-        req.session.save(() => {
-            res.redirect("https://xyzquiz.netlify.app");
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/login" }),
+  (req, res) => {
+    // ✅ Explicitly save session & send cookie
+    req.session.save(err => {
+      if (err) console.error("Session save error:", err);
+      res.redirect("https://xyzquiz.netlify.app");
     });
-}
-
+  }
 );
+
 
 
 
@@ -107,6 +104,16 @@ app.get('/auth/status', (req, res) => {
         return res.status(200).json({ isAuthenticated: false });
     }
 });
+
+app.get("/debug/session", (req, res) => {
+  res.json({
+    cookies: req.headers.cookie,
+    session: req.session,
+    user: req.user,
+    authenticated: req.isAuthenticated(),
+  });
+});
+
 
 app.post('/problemset', async (req, res) => {
     const { setName } = req.body;
