@@ -25,28 +25,20 @@ export const strategy = new GoogleStrategy(
     console.log(user?.email);
 
     if (!user && userEmail) {
-      try {
-        await prisma?.user.create({
-          data: {
-            name: profile?.displayName,
-            email: userEmail,
-            avatar: imageUrl
-          }
-        });
-        console.log("Hi");
-
-        // const id = profile.id;
-        // const name = profile.displayName;
-        // const email = profile.emails;
-        // const avatar = profile.photos ? profile.photos[0].value : undefined;
-        // console.log("Google profile:", avatar);
-        return done(null, profile);
-
-      } catch (err) {
-        return done(err, profile);
-      }
-    } else{
-      return done(null, profile);
-    }
+  try {
+    const newUser = await prisma?.user.create({
+      data: {
+        name: profile.displayName,
+        email: userEmail,
+        avatar: imageUrl,
+      },
+    });
+    return done(null, newUser); // ✅ pass DB user
+  } catch (err) {
+    return done(err, false);
+  }
+} else {
+  return done(null, false); // ✅ return existing DB user
+}
 
   });

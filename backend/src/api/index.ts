@@ -46,29 +46,26 @@ app.use(passport.session());
 
 passport.use(strategy);
 
-passport.serializeUser((user, done: VerifyCallback) => {
-    //@ts-ignore
-    const email = user.emails[0] ? user.emails[0].value : undefined;
-
-    done(null, email);
+passport.serializeUser((user: any, done) => {
+  // Store only the DB user id in session
+  done(null, user.id);
 });
 
-// Deserialize user from session
-passport.deserializeUser(async (userEmail: string, done: VerifyCallback) => {
-
-    try {
-        const user = await prisma?.user.findUnique({
-            where: {
-                email: userEmail as string
-            }
-        });
-        if (user)
-            done(null, user);
-
-    } catch (err) {
-        done(err,false);
+passport.deserializeUser(async (id: string, done) => {
+  try {
+    const user = await prisma?.user.findUnique({
+      where: { id },
+    });
+    if (!user) {
+      return done(null, false); // user not found
     }
+    return done(null, user); // attaches full user to req.user
+  } catch (err) {
+    return done(err, null);
+  }
 });
+
+
 
 app.get("/auth/google",
     passport.authenticate("google", { scope: ["profile", "email"] })
