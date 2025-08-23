@@ -39,6 +39,7 @@ app.use(
             // `secure` must be true in production (HTTPS)
             secure: process.env.NODE_ENV === 'production', 
             // `sameSite` is crucial for cross-origin requests
+            httpOnly: true,
             sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', 
             maxAge: 1000 * 60 * 60 * 24 
         }
@@ -70,7 +71,7 @@ passport.deserializeUser(async (userEmail: string, done: VerifyCallback) => {
             done(null, user);
 
     } catch (err) {
-        done(err);
+        done(err,false);
     }
 });
 
@@ -83,9 +84,11 @@ app.get(
     "/auth/google/callback",
     passport.authenticate("google", { failureRedirect: "/login" }),
     (req, res) => {
-        // Successful login -> create session
-        res.redirect(`https://xyzquiz.netlify.app`);
-    }
+        req.session.save(() => {
+            res.redirect("https://xyzquiz.netlify.app");
+    });
+}
+
 );
 
 
@@ -95,13 +98,6 @@ app.get('/', (req, res) => {
 });
 
 app.get('/auth/status', (req, res) => {
-
-    // //@ts-ignore
-    // const email = req.user.email;
-    // //@ts-ignore
-    // const imageUrl = req.user?.photos? profile.photos[0].value : ""
-    // if(req.isAuthenticated()) console.log(req.user);
-
 
     if (req.isAuthenticated()) {
         // User is authenticated, send a success status and user data
