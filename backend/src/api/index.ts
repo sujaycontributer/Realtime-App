@@ -18,10 +18,10 @@ const pgPool = new pg.Pool({
     connectionString: process.env.DATABASE_URL,
 });
 
-app.use(cors({
-    origin: ["https://xyzquiz.netlify.app", "http://localhost:5173"],
-    credentials: true // allow cookies
-}));
+// app.use(cors({
+//     origin: ["https://xyzquiz.netlify.app", "http://localhost:5173"],
+//     credentials: true // allow cookies
+// }));
 
 app.use(express.json());
 
