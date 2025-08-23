@@ -105,10 +105,10 @@ app.get('/auth/status', (req, res) => {
 
     if (req.isAuthenticated()) {
         // User is authenticated, send a success status and user data
-        res.status(200).json({ isAuthenticated: true, user: req.user });
+        return res.status(200).json({ isAuthenticated: true, user: req.user });
     } else {
         // User is not authenticated, send a failure status
-        res.status(200).json({ isAuthenticated: false });
+        return res.status(200).json({ isAuthenticated: false });
     }
 });
 
@@ -165,7 +165,7 @@ app.get('/problemset', async (req, res) => {
             return res.status(500).json("Error while finding problem set" + (err as any).message);
         }
     } else {
-        res.status(401).json({ message: "Unauthorized" });
+        return res.status(401).json({ message: "Unauthorized" });
     }
 
 });
@@ -204,8 +204,7 @@ app.get('/problem', async (req, res) => {
     let email = undefined;
     //@ts-ignore
     if (req.isAuthenticated && req.isAuthenticated()) email = req.user.email;
-    const { setName } = req.body;
-    const { problemSetId } = req.body;
+    const { setName } = req.query;
 
     try {
         const problems = await prisma?.problemset.findMany({
