@@ -50,7 +50,7 @@ export default function ProblemSet({ roomExist }: { roomExist?: boolean }) {
           if (err.response.status === 401) {
             // User is not authenticated, redirect to the Google login page
             console.log('User not authenticated. Redirecting to login.');
-            window.location.href = `${BACKEND_URL}/auth/google`;
+            // window.location.href = `${BACKEND_URL}/auth/google`;
             return;
           } else {
             // Handle other HTTP errors
