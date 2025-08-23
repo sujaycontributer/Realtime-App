@@ -210,7 +210,7 @@ app.get('/problem', async (req, res) => {
         const problems = await prisma?.problemset.findMany({
             where: {
                 emailId: email,
-                setName: setName
+                setName: setName as string
             },
             include: {
                 problems: true
