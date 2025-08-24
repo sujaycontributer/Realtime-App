@@ -1,4 +1,5 @@
-import { Strategy as GoogleStrategy,Profile, VerifyCallback } from "passport-google-oauth20";
+// Corrected code for src/service/auth.ts
+import { Strategy as GoogleStrategy, Profile, VerifyCallback } from "passport-google-oauth20";
 import prisma from "../lib/prisma";
 import dotenv from 'dotenv';
 
@@ -8,37 +9,37 @@ export const strategy = new GoogleStrategy(
   {
     clientID: process.env.CLIENT_ID as string,
     clientSecret: process.env.CLIENT_SECRET as string,
-    callbackURL: "https://realtime-app-v5sv.onrender.com/auth/google/callback",
+    callbackURL: process.env.CALLBACK_URL as string,
   },
   async (accessToken:string, refreshToken:string, profile:Profile, done:VerifyCallback) => {
-    // Here you get the Google profile info
-    // Normally you would find or create a user in your DB
     const userEmail = profile.emails ? profile.emails[0].value : undefined;
-    const imageUrl = profile.photos ? profile.photos[0].value : ""
+    const imageUrl = profile.photos ? profile.photos[0].value : "";
     console.log(profile.displayName);
   
-    const user = await prisma?.user.findUnique({
-      where: {
-        email: userEmail
+    try {
+      const user = await prisma?.user.findUnique({
+        where: {
+          email: userEmail
+        }
+      });
+      console.log(user?.email);
+  
+      if (user) {
+        // Correct logic: If user exists, return the user object to Passport
+        return done(null, user); 
+      } else if (userEmail) {
+        // Correct logic: If user does not exist, create a new one
+        const newUser = await prisma?.user.create({
+          data: {
+            name: profile.displayName,
+            email: userEmail,
+            avatar: imageUrl,
+          },
+        });
+        return done(null, newUser);
       }
-    });
-    console.log(user?.email);
-
-    if (!user && userEmail) {
-  try {
-    const newUser = await prisma?.user.create({
-      data: {
-        name: profile.displayName,
-        email: userEmail,
-        avatar: imageUrl,
-      },
-    });
-    return done(null, newUser); // ✅ pass DB user
-  } catch (err) {
-    return done(err, false);
+    } catch (err) {
+      return done(err as Error);
+    }
   }
-} else {
-  return done(null, false); // ✅ return existing DB user
-}
-
-  });
+);
