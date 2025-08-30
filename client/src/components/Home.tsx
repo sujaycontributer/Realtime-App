@@ -7,7 +7,7 @@ const Home = () => {
 
   return (
     <div className="flex flex-col gap-8 items-center fixed top-0 left-0 md:left-[305px] justify-center min-h-screen bg-gray-100 p-6">
-      {/* Gradient Motivational Text */}
+
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -18,7 +18,7 @@ const Home = () => {
         question sirf hostel me hi solve karte rahoge <span>🤡</span>
       </motion.h1>
 
-      {/* Clean Small Button */}
+    
       <motion.button
         onClick={handleRedirect}
         whileHover={{ scale: 1.05 }}
@@ -26,7 +26,7 @@ const Home = () => {
         className="group flex items-center gap-2 px-4 py-2 rounded-md font-medium text-white bg-gradient-to-r from-purple-400 to-indigo-400 shadow-md hover:shadow-lg transition-all text-sm"
       >
         <span>Improve UI</span>
-        {/* Shifting star */}
+       
         <motion.span
           className="inline-block"
           whileHover={{ x: 5 }}
