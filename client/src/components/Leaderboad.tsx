@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
 
-// Define the type for the options to ensure type safety
+
 type OptionKeys = 'A' | 'B' | 'C' | 'D';
 
 const Leaderboard = ({ data }:{data: {
