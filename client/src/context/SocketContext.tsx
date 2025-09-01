@@ -1,4 +1,4 @@
-// src/contexts/SocketContext.js
+
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import io, { Socket } from 'socket.io-client';
 import { BACKEND_URL } from '@/lib/utils';
