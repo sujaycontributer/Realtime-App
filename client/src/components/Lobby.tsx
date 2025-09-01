@@ -30,8 +30,6 @@ export default function Lobby() {
     });
 
   }
-
-
   return (
     <div className='fixed top-0 left-0 md:left-[305px] w-full h-screen  flex justify-center items-center bg-gray-200 p-4 text-black font-mono'>
       <div className='md:mr-[300px] flex flex-col items-center justify-center gap-4 p-4 w-[50%]'>
