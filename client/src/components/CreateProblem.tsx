@@ -111,7 +111,6 @@ const CreateProblem = () => {
             {errors.ansOption && <span className="text-red-500 text-sm mt-1 block">Please select the correct answer</span>}
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             className="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-150"
