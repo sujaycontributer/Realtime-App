@@ -49,7 +49,6 @@ const CreateProblem = () => {
             {errors.problemName && <span className="text-red-500 text-sm mt-1 block">This field is required</span>}
           </div>
 
-          {/* Options A-D Inputs */}
           <div>
             <label htmlFor="optionA" className="block text-sm font-semibold text-gray-700 mb-1">Option A</label>
             <input
