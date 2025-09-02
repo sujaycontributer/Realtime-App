@@ -41,7 +41,6 @@ const Leaderboard = ({ data }:{data: {
         return () => clearTimeout(timer);
     }, [data]);
 
-
     return (
         <div className="flex flex-col items-center justify-center w-full p-4 mb-10  bg-gray-100 font-inter text-white">
             <div className="bg-gray-800 p-8 px-14 rounded-3xl md:mr-[615px]  shadow-md mx-auto  w-full md:w-[500px] md:max-2xl text-center border border-gray-700">
