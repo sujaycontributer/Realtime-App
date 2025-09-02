@@ -1,6 +1,4 @@
-
 import { useEffect, useState } from 'react';
-
 
 type OptionKeys = 'A' | 'B' | 'C' | 'D';
 
