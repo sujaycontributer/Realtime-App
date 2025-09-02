@@ -10,7 +10,7 @@ type FormData = {
   optionB: string;
   optionC: string;
   optionD: string;
-  ansOption: 'A' | 'B' | 'C' | 'D'; // The answer will be one of these values
+  ansOption: 'A' | 'B' | 'C' | 'D'; 
 };
 
 const CreateProblem = () => {
