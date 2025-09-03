@@ -25,8 +25,7 @@ let submissions: Submission[] = [];
 
 
 io.on('connection', (client) => {
-    // 3 admin events
-    // 2 client events
+    // 3 admin events, 2 client events
 
      client.on('checkRoomExistence', (roomId) => {
         const room = io.sockets.adapter.rooms.get(roomId); // if not exist, return undefined
