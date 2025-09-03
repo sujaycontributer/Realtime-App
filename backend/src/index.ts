@@ -38,7 +38,6 @@ io.on('connection', (client) => {
             client.emit('room-status', { roomId, exists: true, clients: numberOfClients });
         } else {
             // The room does not exist (no sockets are currently in it)
-            // console.log(`Room '${roomId}' does not exist or is empty.`);
             client.emit('room-status', { roomId, exists: false, clients: 0 });
         }
      });
