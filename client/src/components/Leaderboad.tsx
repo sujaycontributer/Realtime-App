@@ -17,7 +17,6 @@ const Leaderboard = ({ data }:{data: {
         D: Math.floor((data?.D / data?.totalUser) * 100) || 0
     };
 
-   
     const [animatedPercentages, setAnimatedPercentages] = useState({
         A: 0,
         B: 0,
