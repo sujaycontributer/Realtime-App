@@ -17,7 +17,6 @@ const CreateSet = () => {
   );
 };
 
-
 const Create = () => {
   const [inputValue, setInputValue] = useState('');
   const navigate = useNavigate();
