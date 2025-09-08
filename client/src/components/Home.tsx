@@ -18,7 +18,6 @@ const Home = () => {
         question sirf hostel me hi solve karte rahoge <span>🤡</span>
       </motion.h1>
 
-    
       <motion.button
         onClick={handleRedirect}
         whileHover={{ scale: 1.05 }}
