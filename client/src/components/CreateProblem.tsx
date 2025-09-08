@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { BACKEND_URL } from '@/lib/utils';
 import api from '@/api/axios';
 
-// Define the type for our form data
 type FormData = {
   problemName: string;
   optionA: string;
