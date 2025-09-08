@@ -16,7 +16,7 @@ const CreateProblem = () => {
   const { setId } = useParams();
   const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>();
 
-  // Handle form submission
+  // Handle form submission to backend
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     console.log('Form data submitted:', data);
     await api.post(`${BACKEND_URL}/problem`, {
