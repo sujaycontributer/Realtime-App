@@ -12,7 +12,6 @@ app.use(cors({
   credentials: true
 }));
 
-
 export class IoManager {
     private static io: Server;  
 
