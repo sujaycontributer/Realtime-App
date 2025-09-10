@@ -59,7 +59,6 @@ export default function ClinetLobby() {
         <section>
         <Leaderboad data={data}/>
         </section>
-        
       </div>
     </div>
   )
