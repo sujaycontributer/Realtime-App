@@ -7,7 +7,6 @@ export default function Lobby() {
   const [roomId, setRoomId] = useState<string>("");
   const navigate = useNavigate()
 
-
   const joinRoomHandler = () => {
     socket?.connect();
 
