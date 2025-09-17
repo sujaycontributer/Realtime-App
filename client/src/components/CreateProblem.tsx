@@ -35,7 +35,6 @@ const CreateProblem = () => {
         <h1 className="text-3xl font-extrabold text-gray-800 text-center mb-6">Create Problem</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
 
-          {/* Input Problem Name  */}
           <div>
             <label htmlFor="problemName" className="block text-sm font-semibold text-gray-700 mb-1">
               Problem Name
