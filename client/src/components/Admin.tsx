@@ -9,7 +9,6 @@ export default function Admin() {
   // Use a ref to hold the latest roomId value
   const roomIdRef = useRef<HTMLInputElement | null>(null); 
   const navigate = useNavigate();
-
    
   socket?.on('room-status', (room) => {
       if (!room.exits) {
