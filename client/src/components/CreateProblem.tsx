@@ -84,7 +84,6 @@ const CreateProblem = () => {
             {errors.optionD && <span className="text-red-500 text-sm mt-1 block">This field is required</span>}
           </div>
 
-          {/* Correct Answer Radio Buttons */}
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
               Correct Answer
