@@ -49,7 +49,7 @@ const Leaderboard = ({ data }:{data: {
 
                 <div className="flex flex-row justify-between items-end md:w-[400px] gap-4 h-64 mb-6 md:h-80">
                     {userSelection.map((value) => {
-                        // Use the animated percentages from state to control bar height.
+                         // Use the animated percentages from state to control bar height. 
                         const heightPercentage = animatedPercentages[value.id as OptionKeys];
 
                         return (
