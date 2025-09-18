@@ -39,7 +39,6 @@ export default function ClinetLobby() {
           });
         });
 
-
         return () => {
           socket?.off('question');
           socket?.off('leaderboad');
