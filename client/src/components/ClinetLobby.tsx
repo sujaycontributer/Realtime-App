@@ -45,6 +45,7 @@ export default function ClinetLobby() {
           disconnectSocket();
         }
     }, []);
+
     
   return (
     <div  className="min-h-screen fixed top-0 left-0 md:left-[305px] w-full flex flex-col justify-center items-center bg-gray-100">
