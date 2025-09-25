@@ -49,7 +49,6 @@ const Create = () => {
           placeholder="Type here..."
         />
       </div>
-
       <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-100">
         <h3 className="text-lg font-semibold text-blue-800">Current Input Value:</h3>
         <p className="text-blue-700 font-mono mt-2 break-all">{inputValue || <span className="text-gray-400 italic">...empty...</span>}</p>
