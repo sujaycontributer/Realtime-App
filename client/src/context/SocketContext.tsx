@@ -48,7 +48,7 @@ export default function SocketProvider({ children }: { children: ReactNode }) {
     return () => {
       newSocket.disconnect();
     };
-  }, []); // Empty dependency array ensures this runs only once
+  }, []);  // Empty dependency array ensures this runs only once
 
   // Functions to manually control the connection
   const connectSocket = () => {
